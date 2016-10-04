@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.myapplication.R;
 import com.wfcrc.pojos.Program;
 import com.wfcrc.social.Share;
 

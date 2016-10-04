@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.myapplication.R;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -82,7 +80,8 @@ public class FirstResponseFragment extends Fragment {
         ((Button)firstResponseFragmentView.findViewById(R.id.button2)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(FirstResponseFragment.this.getActivity(), DocumentGalleryActivity.class);
+                startActivity(intent);
             }
         });
 

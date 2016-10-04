@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        applicationId "com.myapplication"
+        applicationId "com.wfcrc"
         minSdkVersion 17
         targetSdkVersion 24
         versionCode 1

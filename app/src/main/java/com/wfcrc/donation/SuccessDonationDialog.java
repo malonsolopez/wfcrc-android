@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 
-import com.myapplication.R;
+import com.wfcrc.R;
 import com.wfcrc.social.Share;
 
 /**

@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-import com.myapplication.R;
 import com.wfcrc.donation.DonationPayPal;
 import com.paypal.android.MEP.CheckoutButton;
 import com.paypal.android.MEP.PayPal;

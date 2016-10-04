@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.myapplication.R;
+import com.wfcrc.R;
 import com.paypal.android.MEP.PayPal;
 import com.paypal.android.MEP.PayPalActivity;
 import com.paypal.android.MEP.PayPalInvoiceData;

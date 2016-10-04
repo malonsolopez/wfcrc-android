@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.myapplication.R;
+import com.wfcrc.R;
 
 /**
  * Created by maria on 9/13/16.

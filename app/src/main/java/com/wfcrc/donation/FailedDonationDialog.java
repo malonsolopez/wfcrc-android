@@ -6,7 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.myapplication.R;
+import com.wfcrc.R;
 
 /**
  * Created by maria on 9/14/16.

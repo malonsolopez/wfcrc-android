@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.wfcrc;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
