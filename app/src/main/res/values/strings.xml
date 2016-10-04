@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">WFCRC</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- COMMON STUFF -->
+    <string name="share">Share</string>
+    <string name="wfcrc">World Federation for Coral Reef Conservation</string>
+    <string name="learn">Learn more</string>
+    <string name="donate">Donate</string>
+    <string name="webURL"><a href="http://wfcrc.org">http://wfcrc.org</a></string>
+    <string name="currency">$</string>
+
+    <!-- RIGHT MENU -->
+
+    <string name="action_settings">Settings</string>
+
+    <!-- LEFT MENU -->
+    <string name="home">Home</string>
+    <string name="About">About us</string>
+    <string name="feedback">Feedback</string>
+
+
+    <!-- PROGRAMS TAB -->
+    <string name="programs_tab_title">Programs</string>
+
+
+    <!-- MAPS TAB -->
+    <string name="maps_tab_title">Geo-Portal</string>
+
+    <!-- FIRST RESPONSE TAB -->
+    <string name="first_response_tab_title">First Response</string>
+
+    <!-- ABOUT US -->
+    <string name="aboutDescription">The World Federation for Coral Reef Conservation is a nonprofit organization dedicated to stopping the destruction of coral reefs by involving local citizens, scientists and recreational divers in utilizing spatial data more effectively as it pertains to reef decline. This service-oriented spatial data infrastructure brings together current data and observations, data management, GIS/GPS current technology, and leading edge internet communication to provide the "real time" data necessary to make informed decisions regarding coral reef decline.</string>
+    <string name="follow">Follow us</string>
+    <string name="follow_twitter">https://twitter.com/intent/follow?screen_name=WFCRConserve</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <!-- DONATE -->
+    <string name="donate_description">100% of your tax deductible donation will go towards program development, logistical training for our volunteers in the field, outreach and education. We thank you for your support.</string>
+    <string name="donate_paypal">Donate with PayPal</string>
+    <string name="donate_defaultAmount1">5</string>
+    <string name="donate_defaultAmount2">10</string>
+    <string name="donate_defaultAmount3">20</string>
+    <string name="donate_otherAmount">Other mAmount:</string>
+    <string name="donate_otherAmount_hint">$</string>
+    <string name="donate_error_title">Oops!</string>
+    <string name="donate_error_description">Something went wrong and we weren\'t able to complete your donation. Your payment has been cancelled and your account was not charged. Please, try again later.</string>
+    <string name="donate_success_title">Thank you!</string>
+    <string name="donate_success_description">Your donation to WFCRC helps save the coral reef.</string>
+    <string name="donate_share_subject">Donate to WFCRC</string>
+    <string name="donate_share_body">My donation to WFCRC helps save the coral reef.</string>
+    <string name="donation_invoice">Donation to WFCRC</string>
+
+    <!-- FEEDBACK FORM -->
+    <string name="feedback_title">Send feedback</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="type_coral">Type of coral</string>
+    <string name="type_coral_prompt">Choose one or more options</string>
+    <string name="attach">Attach photos</string>
+    <string name="comments">Comments</string>
+    <string name="percent_coral">Percent live coral</string>
+    <string name="estimated_area">Estimated area affected (sq ft)</string>
+    <string name="location">Location</string>
+    <string name="depth">Maximum depth (feet)</string>
+    <string-array name="type_coral_array">
+        <item>Smooth Mounding</item>
+        <item>Smooth Finger</item>
+        <item>Smooth Plate &amp; Pillar</item>
+        <item>Rice Coral</item>
+        <item>Small/Branching</item>
+        <item>Corrugated</item>
+    </string-array>
+
+</resources>
