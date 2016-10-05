@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by maria on 8/29/16.
@@ -62,42 +63,56 @@ public class Document implements Serializable{
 
     // Decodes program json into program model object
     public static Document fromJson(JSONObject jsonObject) {
-        Document program = new Document();
+        Document document = new Document();
         // Deserialize json into object fields
         try {
-            program.title = jsonObject.getString("title");
-            program.format = jsonObject.getString("format");
-            program.category = jsonObject.getString("category");
-            program.url = jsonObject.getString("url");
+            document.title = jsonObject.getString("title");
+            document.format = jsonObject.getString("format");
+            document.category = jsonObject.getString("category");
+            document.url = jsonObject.getString("url");
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
         // Return new object
-        return program;
+        return document;
     }
 
     // Decodes array of program json results into program model objects
     public static ArrayList<Document> fromJson(String strJson) throws JSONException {
         JSONObject  jsonRootObject = new JSONObject(strJson);
         //Get the instance of JSONArray that contains JSONObjects
-        JSONArray jsonArray = jsonRootObject.optJSONArray("program");
-        JSONObject programJson;
-        ArrayList<Document> programs = new ArrayList<Document>(jsonArray.length());
+        JSONArray jsonArray = jsonRootObject.optJSONArray("document");
+        JSONObject documentJson;
+        ArrayList<Document> documents = new ArrayList<Document>(jsonArray.length());
         // Process each result in json array, decode and convert to business object
         for (int i=0; i < jsonArray.length(); i++) {
             try {
-                programJson = jsonArray.getJSONObject(i);
+                documentJson = jsonArray.getJSONObject(i);
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;
             }
 
-            Document program = Document.fromJson(programJson);
-            if (program != null) {
-                programs.add(program);
+            Document document = Document.fromJson(documentJson);
+            if (document != null) {
+                documents.add(document);
             }
         }
-        return programs;
+        return documents;
+    }
+
+    public static HashMap<String, ArrayList<Document>> sortDocuments(ArrayList<Document> documents){
+        HashMap<String, ArrayList<Document>> result = new HashMap<String, ArrayList<Document>>();
+        for (Document document: documents) {
+            if(result.containsKey(document.category)){
+                result.get(document.category).add(document);
+            }else{
+                ArrayList<Document> newEntry = new ArrayList<Document>();
+                newEntry.add(document);
+                result.put(document.category, newEntry);
+            }
+        }
+        return result;
     }
 }
