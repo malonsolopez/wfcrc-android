@@ -1,43 +1,37 @@
 package com.wfcrc;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Document;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class DocumentGalleryActivity extends AppCompatActivity {
 
-    private ArrayList<Document> mDocumentGallery;
+    private List<Document> mDocumentGallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document_gallery);
+        mDocumentGallery = AppConfig.getDocumentRepository(this).getAll();
         initDocumentGallery();
     }
 
     private void initDocumentGallery(){
         LinearLayout documentGalleryLayout = (LinearLayout) findViewById(R.id.documentGalleryLayout);
         //short documents in sublist
-        try {
-            mDocumentGallery = Document.fromJson(loadJSONFromAsset());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         HashMap<String, ArrayList<Document>> sortedDocumentGallery = Document.sortDocuments(mDocumentGallery);
         //create list per each category
         Iterator iterator = sortedDocumentGallery.entrySet().iterator();
@@ -66,19 +60,4 @@ public class DocumentGalleryActivity extends AppCompatActivity {
         }
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = getResources().openRawResource(R.raw.document_gallery);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
 }

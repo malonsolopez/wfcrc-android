@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by maria on 8/29/16.
@@ -102,7 +103,7 @@ public class Document implements Serializable{
         return documents;
     }
 
-    public static HashMap<String, ArrayList<Document>> sortDocuments(ArrayList<Document> documents){
+    public static HashMap<String, ArrayList<Document>> sortDocuments(List<Document> documents){
         HashMap<String, ArrayList<Document>> result = new HashMap<String, ArrayList<Document>>();
         for (Document document: documents) {
             if(result.containsKey(document.category)){

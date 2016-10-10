@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Program;
 import com.wfcrc.social.Share;
 
@@ -22,6 +23,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -46,7 +48,7 @@ public class ProgramsFragment extends Fragment {
 
     private View mProgramsFragmentView;
 
-    private ArrayList<Program> mPrograms;
+    private List<Program> mPrograms;
 
     public ProgramsFragment() {
         // Required empty public constructor
@@ -84,15 +86,11 @@ public class ProgramsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mProgramsFragmentView = inflater.inflate(R.layout.fragment_programs, container, false);
-
-        try {
-            mPrograms = Program.fromJson(loadJSONFromAsset());
+        mPrograms = AppConfig.getProgramRepository(this.getContext()).getAll();
+        if (mPrograms != null) {
             for (Program program:mPrograms) {
                 initCard(inflater, container, program);
             }
-        }catch(JSONException e){
-            e.printStackTrace();
-            //TODO: load message error
         }
         return mProgramsFragmentView;
     }
@@ -181,19 +179,4 @@ public class ProgramsFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = getResources().openRawResource(R.raw.programs);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
 }
