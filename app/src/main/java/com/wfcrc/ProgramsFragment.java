@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wfcrc.adapters.ProgramCardAdapter;
 import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Program;
 import com.wfcrc.social.Share;
@@ -87,11 +90,16 @@ public class ProgramsFragment extends Fragment {
         // Inflate the layout for this fragment
         mProgramsFragmentView = inflater.inflate(R.layout.fragment_programs, container, false);
         mPrograms = AppConfig.getProgramRepository(this.getContext()).getAll();
-        if (mPrograms != null) {
+        /*if (mPrograms != null) {
             for (Program program:mPrograms) {
                 initCard(inflater, container, program);
             }
-        }
+        }*/
+        RecyclerView mRecyclerView = (RecyclerView) mProgramsFragmentView.findViewById(R.id.framentProgramsLayout);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(new ProgramCardAdapter(this.getContext(), mPrograms));
         return mProgramsFragmentView;
     }
 

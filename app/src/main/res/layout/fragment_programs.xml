@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     >
@@ -9,12 +9,21 @@
         android:id="@+id/framentProgramsLayout"
         android:layout_marginTop="?attr/actionBarSize">
 
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        />-->
-
     </LinearLayout>
 
-</ScrollView>
+</ScrollView>-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize">
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/framentProgramsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:scrollbars="vertical"/>
+
+</RelativeLayout>

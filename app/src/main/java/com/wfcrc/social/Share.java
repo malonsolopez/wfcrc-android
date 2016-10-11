@@ -1,6 +1,7 @@
 package com.wfcrc.social;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 /**
@@ -8,11 +9,11 @@ import android.content.Intent;
  */
 public class Share {
 
-    private Activity mContext;
+    private Context mContext;
     private String subject;
     private String body;
 
-    public Share(Activity mContext, String subject, String body) {
+    public Share(Context mContext, String subject, String body) {
         this.mContext = mContext;
         this.subject = subject;
         this.body = body;
