@@ -40,6 +40,8 @@
     <string name="aboutDescription">The World Federation for Coral Reef Conservation is a nonprofit organization dedicated to stopping the destruction of coral reefs by involving local citizens, scientists and recreational divers in utilizing spatial data more effectively as it pertains to reef decline. This service-oriented spatial data infrastructure brings together current data and observations, data management, GIS/GPS current technology, and leading edge internet communication to provide the "real time" data necessary to make informed decisions regarding coral reef decline.</string>
     <string name="follow">Follow us</string>
     <string name="follow_twitter">https://twitter.com/intent/follow?screen_name=WFCRConserve</string>
+    <string name="follow_facebook">https://www.facebook.com/TheWorldFederationForCoralReefConservation/</string>
+    <string name="follow_linkein">http://www.linkedin.com/company/world-federation-for-coral-reef-conservation</string>
     <string name="title_activity_splash">SplashActivity</string>
 
     <!-- DONATE -->

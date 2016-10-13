@@ -6,6 +6,6 @@ package com.wfcrc.social;
 public interface FollowUs {
 
 
-    public void follow();
+    public void follow(String socialNetwork);
 
 }

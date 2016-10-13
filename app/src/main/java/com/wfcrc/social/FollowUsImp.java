@@ -9,17 +9,17 @@ import com.wfcrc.R;
 /**
  * Created by maria on 9/13/16.
  */
-public class FollowUsTwitter implements FollowUs{
+public class FollowUsImp implements FollowUs{
 
     private Activity mContext;
 
-    public FollowUsTwitter(Activity mContext){
+    public FollowUsImp(Activity mContext){
         this.mContext = mContext;
     }
 
-    public void follow(){
+    public void follow(String socialNetwork){
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(mContext.getString(R.string.follow_twitter)));
+        intent.setData(Uri.parse(socialNetwork));
         mContext.startActivity(intent);
     }
 }

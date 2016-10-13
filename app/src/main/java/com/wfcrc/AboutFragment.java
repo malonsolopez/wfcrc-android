@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.wfcrc.social.FollowUsTwitter;
+import com.wfcrc.social.FollowUsImp;
 
 
 /**
@@ -73,19 +73,19 @@ public class AboutFragment extends Fragment {
         ((Button)aboutView.findViewById(R.id.followTWButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new FollowUsTwitter(AboutFragment.this.getActivity()).follow();
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_twitter));
             }
         });
         ((Button)aboutView.findViewById(R.id.followFBButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_facebook));
             }
         });
         ((Button)aboutView.findViewById(R.id.followLIButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_linkein));
             }
         });
         //custom toolbar with donate option for this fragment
