@@ -1,9 +1,12 @@
 package com.wfcrc;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +24,15 @@ public class ProgramDetailActivity extends AppCompatActivity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         mProgram = (Program) getIntent().getSerializableExtra("Program");
         initProgramDetailView();
+        //donate floating button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.donate);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent donateIntent = new Intent(ProgramDetailActivity.this, DonateActivity.class);
+                startActivity(donateIntent);
+            }
+        });
     }
 
     private void initProgramDetailView(){
