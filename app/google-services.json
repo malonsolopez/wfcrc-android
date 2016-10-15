@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "749853526427",
+    "project_id": "firebase-wfcrc"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749853526427:android:12b3c6fe80fefd0b",
+        "android_client_info": {
+          "package_name": "com.wfcrc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvMak1xCiRMjnHj-1JI6ToQwDpMNQ8he0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-85734842-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

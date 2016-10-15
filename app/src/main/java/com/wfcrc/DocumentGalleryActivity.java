@@ -27,6 +27,8 @@ public class DocumentGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_document_gallery);
         mDocumentGallery = AppConfig.getDocumentRepository(this).getAll();
         initDocumentGallery();
+        //GA
+        ((AppConfig)getApplication()).getAnalytics().sendPageView("Document Gallery");
     }
 
     private void initDocumentGallery(){
@@ -51,6 +53,7 @@ public class DocumentGalleryActivity extends AppCompatActivity {
                     //TODO: (ImageView) view.findViewById(R.id.documentIcon);
                     ((TextView) view.findViewById(R.id.documentTitle)).setText(document.getTitle());
                     //TODO: (ImageView) view.findViewById(R.id.documentSync);
+                    //TODO: onClick on the document
                     View divider = this.getLayoutInflater().inflate(R.layout.document_gallery_item, null);
                     divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
                     divider.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
