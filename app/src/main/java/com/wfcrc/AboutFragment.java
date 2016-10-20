@@ -1,6 +1,7 @@
 package com.wfcrc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.wfcrc.analytics.Analytics;
+import com.wfcrc.config.AppConfig;
 import com.wfcrc.social.FollowUsImp;
 import com.wfcrc.social.Share;
 
@@ -35,6 +39,8 @@ public class AboutFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private Analytics mTracker;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -76,22 +82,40 @@ public class AboutFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_twitter));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_TW));
             }
         });
         ((Button)aboutView.findViewById(R.id.followFBButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_facebook));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_FB));
             }
         });
         ((Button)aboutView.findViewById(R.id.followLIButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_linkein));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_LI));
+            }
+        });
+        ((TextView)aboutView.findViewById(R.id.webLink)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.webURL)));
+                startActivity(browserIntent);
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_web), getString(R.string.ga_about_web));
             }
         });
         //custom toolbar with donate option for this fragment
         setHasOptionsMenu(true);
+        //GA
+        mTracker = ((AppConfig)getActivity().getApplication()).getAnalytics();
+        mTracker.sendPageView(getString(R.string.ga_about));
         return aboutView;
     }
 
@@ -115,6 +139,8 @@ public class AboutFragment extends Fragment {
             String subject ="";
             String body ="";
             (new Share(getActivity(), subject, body)).share();
+            //GA
+            mTracker.sendEvent(getString(R.string.ga_category_share), getString(R.string.ga_about_share));
         }
 
         return super.onOptionsItemSelected(item);

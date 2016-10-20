@@ -10,12 +10,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wfcrc.analytics.Analytics;
+import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Program;
 import com.wfcrc.social.Share;
 
 public class ProgramDetailActivity extends AppCompatActivity {
 
     private Program mProgram;
+
+    private Analytics mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,9 @@ public class ProgramDetailActivity extends AppCompatActivity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         mProgram = (Program) getIntent().getSerializableExtra("Program");
         initProgramDetailView();
+        //GA
+        mTracker = ((AppConfig)getApplication()).getAnalytics();
+        mTracker.sendPageView(getString(R.string.ga_programs_detail));
         //donate floating button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.donate);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +38,7 @@ public class ProgramDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent donateIntent = new Intent(ProgramDetailActivity.this, DonateActivity.class);
                 startActivity(donateIntent);
+
             }
         });
     }
@@ -65,6 +73,8 @@ public class ProgramDetailActivity extends AppCompatActivity {
             String subject ="";
             String body ="";
             (new Share(this, subject, body)).share();
+            //GA
+            mTracker.sendEvent(getString(R.string.ga_category_share), getString(R.string.ga_programs_detail_share), mProgram.getTitle());
         }
 
         return super.onOptionsItemSelected(item);

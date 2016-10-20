@@ -28,7 +28,7 @@ public class DocumentGalleryActivity extends AppCompatActivity {
         mDocumentGallery = AppConfig.getDocumentRepository(this).getAll();
         initDocumentGallery();
         //GA
-        ((AppConfig)getApplication()).getAnalytics().sendPageView("Document Gallery");
+        ((AppConfig)getApplication()).getAnalytics().sendPageView(getString(R.string.ga_document_gallery));
     }
 
     private void initDocumentGallery(){

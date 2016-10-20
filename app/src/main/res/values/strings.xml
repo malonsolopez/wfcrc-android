@@ -83,4 +83,21 @@
         <item>Corrugated</item>
     </string-array>
 
+    <!-- GA -->
+    <string name="ga_programs_fragment">Programs Tab</string>
+    <string name="ga_programs_fragment_more">Open Program Detail</string>
+    <string name="ga_programs_fragment_share">Share Program</string>
+    <string name="ga_programs_detail">Program Detail</string>
+    <string name="ga_programs_detail_share">Share Program Detail</string>
+    <string name="ga_document_gallery">Document Gallery</string>
+    <string name="ga_about">About Us</string>
+    <string name="ga_about_web">Open website</string>
+    <string name="ga_about_follow">Follow social network</string>
+    <string name="ga_about_FB">Facebook</string>
+    <string name="ga_about_TW">Twitter</string>
+    <string name="ga_about_LI">LinkedIn</string>
+    <string name="ga_about_share">Share About Us</string>
+    <string name="ga_category_share">Share</string>
+
+
 </resources>

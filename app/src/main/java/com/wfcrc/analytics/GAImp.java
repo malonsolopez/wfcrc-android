@@ -46,12 +46,19 @@ public class GAImp implements Analytics{
     }
 
     @Override
-    public void sendEvent(String category, String action , String label, long value) {
+    public void sendEvent(String category, String action) {
         if(action != null && category!= null){//at least you need to specify the action and the category
-            HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder(action, category);
+            HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder(category, action);
+            mTracker.send(eventBuilder.build());
+        }
+    }
+
+    @Override
+    public void sendEvent(String category, String action , String label) {
+        if(action != null && category!= null){//at least you need to specify the action and the category
+            HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder(category, action);
             if(label != null) {
                 eventBuilder.setLabel(label);
-                eventBuilder.setValue(value);
             }
             mTracker.send(eventBuilder.build());
         }

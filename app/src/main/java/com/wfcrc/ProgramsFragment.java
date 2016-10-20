@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wfcrc.adapters.ProgramCardAdapter;
+import com.wfcrc.analytics.Analytics;
 import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Program;
 import com.wfcrc.social.Share;
@@ -52,6 +53,8 @@ public class ProgramsFragment extends Fragment {
     private View mProgramsFragmentView;
 
     private List<Program> mPrograms;
+
+    private Analytics mTracker;
 
     public ProgramsFragment() {
         // Required empty public constructor
@@ -100,6 +103,9 @@ public class ProgramsFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(new ProgramCardAdapter(this.getContext(), mPrograms));
+        //GA
+        mTracker = ((AppConfig)getActivity().getApplication()).getAnalytics();
+        mTracker.sendPageView(getString(R.string.ga_programs_fragment));
         return mProgramsFragmentView;
     }
 
@@ -137,6 +143,8 @@ public class ProgramsFragment extends Fragment {
                 String subject ="";
                 String body ="";
                 (new Share(ProgramsFragment.this.getActivity(), subject, body)).share();
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_category_share), getString(R.string.ga_programs_fragment_share), program.getTitle());
             }
         });
         ((LinearLayout)mProgramsFragmentView.findViewById(R.id.framentProgramsLayout)).addView(cardLayout);
@@ -153,6 +161,8 @@ public class ProgramsFragment extends Fragment {
         Intent intent = new Intent(this.getActivity(), ProgramDetailActivity.class);
         intent.putExtra("Program", program);
         startActivity(intent);
+        //GA
+        mTracker.sendEvent(getString(R.string.ga_programs_fragment_more), getString(R.string.ga_programs_fragment_more), program.getTitle());
     }
 
     @Override

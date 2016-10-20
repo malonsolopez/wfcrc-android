@@ -7,5 +7,7 @@ public interface Analytics {
 
     void sendPageView(String screenName);
 
-    void sendEvent(String category, String action , String label, long value);
+    void sendEvent(String category, String action);
+
+    void sendEvent(String category, String action , String label);
 }
