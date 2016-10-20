@@ -93,11 +93,6 @@ public class ProgramsFragment extends Fragment {
         // Inflate the layout for this fragment
         mProgramsFragmentView = inflater.inflate(R.layout.fragment_programs, container, false);
         mPrograms = AppConfig.getProgramRepository(this.getContext()).getAll();
-        /*if (mPrograms != null) {
-            for (Program program:mPrograms) {
-                initCard(inflater, container, program);
-            }
-        }*/
         RecyclerView mRecyclerView = (RecyclerView) mProgramsFragmentView.findViewById(R.id.framentProgramsLayout);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
@@ -109,60 +104,11 @@ public class ProgramsFragment extends Fragment {
         return mProgramsFragmentView;
     }
 
-    private void initCard(LayoutInflater inflater, ViewGroup container, final Program program) {
-        LinearLayout cardLayout = (LinearLayout) inflater.inflate(R.layout.program_cardview, container, false);
-        CardView card = (CardView) cardLayout.findViewById(R.id.programCard);
-        ImageView cardImage = (ImageView) card.findViewById(R.id.cardThumbnail);
-        int imageId = getResources().getIdentifier(program.getImageId(), "drawable", getActivity().getPackageName());
-        if(imageId == 0)
-            cardImage.setVisibility(ImageView.GONE);
-        else
-            cardImage.setImageResource(imageId);
-        TextView cardTitle = (TextView)card.findViewById(R.id.cardTitle);
-        cardTitle.setText(program.getTitle());
-        TextView cardDescription = (TextView)card.findViewById(R.id.cardDescription);
-        cardDescription.setText(program.getSubtitle());
-        card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openProgramDetail(program);
-            }
-        });
-        Button learnMoreButton = (Button)card.findViewById(R.id.cardAction1);
-        learnMoreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openProgramDetail(program);
-            }
-        });
-
-        ((Button)card.findViewById(R.id.cardAction2)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: content for sharing
-                String subject ="";
-                String body ="";
-                (new Share(ProgramsFragment.this.getActivity(), subject, body)).share();
-                //GA
-                mTracker.sendEvent(getString(R.string.ga_category_share), getString(R.string.ga_programs_fragment_share), program.getTitle());
-            }
-        });
-        ((LinearLayout)mProgramsFragmentView.findViewById(R.id.framentProgramsLayout)).addView(cardLayout);
-    }
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
-
-    private void openProgramDetail(Program program){
-        Intent intent = new Intent(this.getActivity(), ProgramDetailActivity.class);
-        intent.putExtra("Program", program);
-        startActivity(intent);
-        //GA
-        mTracker.sendEvent(getString(R.string.ga_programs_fragment_more), getString(R.string.ga_programs_fragment_more), program.getTitle());
     }
 
     @Override

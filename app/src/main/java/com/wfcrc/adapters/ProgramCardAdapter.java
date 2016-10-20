@@ -12,8 +12,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.Tracker;
 import com.wfcrc.ProgramDetailActivity;
 import com.wfcrc.R;
+import com.wfcrc.analytics.Analytics;
+import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Program;
 import com.wfcrc.social.Share;
 
@@ -32,6 +35,9 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
     private Context mContext;
 
     private static MyClickListenerImplementation myClickListener;
+
+    private Analytics mTracker;
+
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener{
@@ -63,6 +69,7 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
         mContext = context;
         mDataset = myDataset;
         this.setOnItemClickListener(new MyClickListenerImplementation());
+        mTracker =  ((AppConfig)mContext.getApplicationContext()).getAnalytics();
     }
 
     @Override
@@ -95,6 +102,8 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
                 String subject ="";
                 String body ="";
                 (new Share(ProgramCardAdapter.this.mContext, subject, body)).share();
+                //GA
+                mTracker.sendEvent(mContext.getString(R.string.ga_category_share), mContext.getString(R.string.ga_programs_fragment_share), program.getTitle());
             }
         });
     }
@@ -134,5 +143,7 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
         Intent intent = new Intent(mContext, ProgramDetailActivity.class);
         intent.putExtra("Program", program);
         mContext.startActivity(intent);
+        //GA
+        mTracker.sendEvent(mContext.getString(R.string.ga_programs_fragment_more), mContext.getString(R.string.ga_programs_fragment_more), program.getTitle());
     }
 }
