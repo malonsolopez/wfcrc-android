@@ -2,12 +2,15 @@ package com.wfcrc;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wfcrc.adapters.DocumentGalleryAdapter;
 import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Document;
 
@@ -39,26 +42,16 @@ public class DocumentGalleryActivity extends AppCompatActivity {
         Iterator iterator = sortedDocumentGallery.entrySet().iterator();
         while(iterator.hasNext()){
             Map.Entry documents = (Map.Entry)iterator.next();
-            //title (category)
-            LayoutInflater inflater = LayoutInflater.from(this);
-            View title = inflater.inflate(R.layout.document_gallery_category_title, documentGalleryLayout, false);
-            documentGalleryLayout.addView(title);
-            ((TextView)title.findViewById(R.id.documentCategory)).setText(documents.getKey().toString());
             //list of documents for this category
             ArrayList<Document> documentList = (ArrayList<Document>)documents.getValue();
+            //the category (title) is going to be the first element in form of an imaginary document, so the adapter can draw it as the title
+            documentList.add(0, new Document(documents.getKey().toString(), null, null, null));
             if (documentList != null) {
-                for (Document document:documentList) {
-                    View view = inflater.inflate(R.layout.document_gallery_item, documentGalleryLayout, false);
-                    documentGalleryLayout.addView(view);
-                    //TODO: (ImageView) view.findViewById(R.id.documentIcon);
-                    ((TextView) view.findViewById(R.id.documentTitle)).setText(document.getTitle());
-                    //TODO: (ImageView) view.findViewById(R.id.documentSync);
-                    //TODO: onClick on the document
-                    View divider = this.getLayoutInflater().inflate(R.layout.document_gallery_item, null);
-                    divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
-                    divider.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-                    documentGalleryLayout.addView(divider);
-                }
+                RecyclerView newDocumentList = new RecyclerView(this);
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+                newDocumentList.setLayoutManager(mLayoutManager);
+                newDocumentList.setAdapter(new DocumentGalleryAdapter(this, documentList));
+                documentGalleryLayout.addView(newDocumentList);
             }
         }
     }
