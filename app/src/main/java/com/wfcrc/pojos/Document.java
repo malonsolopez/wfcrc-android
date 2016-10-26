@@ -67,10 +67,10 @@ public class Document implements Serializable{
         Document document = new Document();
         // Deserialize json into object fields
         try {
-            document.title = jsonObject.getString("title");
-            document.format = jsonObject.getString("format");
-            document.category = jsonObject.getString("category");
-            document.url = jsonObject.getString("url");
+            document.title = jsonObject.getJSONObject("title").getString("rendered");
+            document.format = jsonObject.getString("mime_type");
+            document.category = jsonObject.getString("description");
+            document.url = jsonObject.getString("source_url");
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
@@ -79,29 +79,7 @@ public class Document implements Serializable{
         return document;
     }
 
-    // Decodes array of program json results into program model objects
-    public static ArrayList<Document> fromJson(String strJson) throws JSONException {
-        JSONObject  jsonRootObject = new JSONObject(strJson);
-        //Get the instance of JSONArray that contains JSONObjects
-        JSONArray jsonArray = jsonRootObject.optJSONArray("document");
-        JSONObject documentJson;
-        ArrayList<Document> documents = new ArrayList<Document>(jsonArray.length());
-        // Process each result in json array, decode and convert to business object
-        for (int i=0; i < jsonArray.length(); i++) {
-            try {
-                documentJson = jsonArray.getJSONObject(i);
-            } catch (Exception e) {
-                e.printStackTrace();
-                continue;
-            }
 
-            Document document = Document.fromJson(documentJson);
-            if (document != null) {
-                documents.add(document);
-            }
-        }
-        return documents;
-    }
 
     public static HashMap<String, ArrayList<Document>> sortDocuments(List<Document> documents){
         HashMap<String, ArrayList<Document>> result = new HashMap<String, ArrayList<Document>>();
