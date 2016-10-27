@@ -7,6 +7,7 @@ import com.wfcrc.analytics.Analytics;
 import com.wfcrc.analytics.GAImp;
 import com.wfcrc.pojos.Document;
 import com.wfcrc.pojos.Program;
+import com.wfcrc.repository.InternalStorageDocumentRepository;
 import com.wfcrc.repository.LocalRawValuesDocumentRepository;
 import com.wfcrc.repository.LocalRawValuesProgramRepository;
 import com.wfcrc.repository.Repository;
@@ -20,7 +21,8 @@ public class AppConfig extends Application{
 
     public static Repository<Document> getDocumentRepository(Context context) {
         if(mDocumentRepository == null)
-            mDocumentRepository = new LocalRawValuesDocumentRepository(context);
+            //mDocumentRepository = new LocalRawValuesDocumentRepository(context);
+            mDocumentRepository = new InternalStorageDocumentRepository(context);
         return mDocumentRepository;
     }
 

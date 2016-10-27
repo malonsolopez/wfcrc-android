@@ -25,6 +25,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //retrieve document gallery
         (new WordPressDocumentRepository(this, new SplashVolleyCallback(this))).getAll();
+//        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 
     private class SplashVolleyCallback extends VolleyCallback{
@@ -41,7 +44,11 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         public void onError(String error){
+            super.onError(error);
             //TODO: use offline data from previous usages of the app
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
