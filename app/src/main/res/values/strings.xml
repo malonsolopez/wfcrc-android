@@ -98,6 +98,7 @@
     <string name="ga_about_LI">LinkedIn</string>
     <string name="ga_about_share">Share About Us</string>
     <string name="ga_category_share">Share</string>
+    <string name="title_activity_document_gallery_search">DocumentGallerySearchActivity</string>
 
 
 </resources>

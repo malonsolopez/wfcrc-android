@@ -32,6 +32,8 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private Analytics mTracker;
 
+    private boolean mNeedsTitle;
+
     public static class TitleHolder extends RecyclerView.ViewHolder{
 
         TextView documentCategory;
@@ -66,16 +68,17 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
 
-    public DocumentGalleryAdapter(Context context, List<Document> myDataset) {
+    public DocumentGalleryAdapter(Context context, List<Document> myDataset, boolean needsTitle) {
         mContext = context;
         mDataset = myDataset;
+        mNeedsTitle = needsTitle;
         this.setOnItemClickListener(new MyClickListenerImplementation());
         mTracker =  ((AppConfig)mContext.getApplicationContext()).getAnalytics();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0)
+        if(position == 0 && mNeedsTitle)
             return 0;//first item is the title
         else
             return 1;//the rest of the items are documents
@@ -95,13 +98,20 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Document document = mDataset.get(position);
-        if (position != 0) {
+        if (mNeedsTitle) {
+            if (position != 0) {
+                //TODO: set right icons
+                //((ItemHolder)holder).documentIcon.setImageResource(imageId);
+                ((ItemHolder) holder).documentTitle.setText(document.getTitle());
+                //((ItemHolder)holder).documentSync.setImageResource(imageId);
+            } else {
+                ((TitleHolder) holder).documentCategory.setText(document.getTitle());
+            }
+        }else{
             //TODO: set right icons
             //((ItemHolder)holder).documentIcon.setImageResource(imageId);
-            ((ItemHolder)holder).documentTitle.setText(document.getTitle());
+            ((ItemHolder) holder).documentTitle.setText(document.getTitle());
             //((ItemHolder)holder).documentSync.setImageResource(imageId);
-        }else{
-            ((TitleHolder)holder).documentCategory.setText(document.getTitle());
         }
     }
 

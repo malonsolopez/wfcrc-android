@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".config.AppConfig"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
         <activity
-            android:name="com.wfcrc.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,15 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.wfcrc.ProgramDetailActivity"
-            android:parentActivityName="com.wfcrc.MainActivity"
+            android:name=".ProgramDetailActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wfcrc.MainActivity" />
         </activity>
         <activity
-            android:name="com.wfcrc.SplashActivity"
+            android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -39,15 +39,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.wfcrc.DonateActivity" />
+        <activity android:name=".DonateActivity" />
         <activity
             android:name="com.paypal.android.MEP.PayPalActivity"
             android:configChanges="keyboardHidden|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name="com.wfcrc.FeedbackActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="com.wfcrc.DocumentGalleryActivity"></activity>
+            android:name=".FeedbackActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DocumentGalleryActivity" />
+        <activity
+            android:name=".DocumentGallerySearchActivity"
+            android:parentActivityName=".DocumentGalleryActivity"
+            android:theme="@style/Theme.AppCompat.Light">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wfcrc.DocumentGalleryActivity" />
+        </activity>
     </application>
 
 </manifest>

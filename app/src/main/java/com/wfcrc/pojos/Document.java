@@ -1,5 +1,8 @@
 package com.wfcrc.pojos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +15,7 @@ import java.util.List;
 /**
  * Created by maria on 8/29/16.
  */
-public class Document implements Serializable{
+public class Document implements Serializable, Parcelable{
 
     private String title;
     private String format;
@@ -93,5 +96,35 @@ public class Document implements Serializable{
             }
         }
         return result;
+    }
+
+    //PARCELABLE IMPLEMENTATION
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeStringArray(new String[] {this.title, this.format, this.category, this.url});
+    }
+
+    public static final Parcelable.Creator<Document> CREATOR
+            = new Parcelable.Creator<Document>() {
+        public Document createFromParcel(Parcel in) {
+            return new Document(in);
+        }
+
+        public Document[] newArray(int size) {
+            return new Document[size];
+        }
+    };
+
+    private Document(Parcel in) {
+        String[] data = new String[4];
+        in.readStringArray(data);
+        this.title = data[0];
+        this.format = data[1];
+        this.category = data[2];
+        this.url = data[3];
     }
 }
