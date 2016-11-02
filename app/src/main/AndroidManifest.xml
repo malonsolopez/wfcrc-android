@@ -47,7 +47,7 @@
         <activity
             android:name=".FeedbackActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DocumentGalleryActivity" />
+        <activity android:name=".DocumentGalleryActivity"/>
         <activity
             android:name=".DocumentGallerySearchActivity"
             android:parentActivityName=".DocumentGalleryActivity"
