@@ -29,7 +29,7 @@ public class InternalStorageDocumentRepository implements Repository{
 
     @Override
     public List<Document> getAll() {
-        ArrayList<Document> documents = new ArrayList<Document>();
+        List<Document> documents = new ArrayList<Document>();
         try {
             FileInputStream fileInputStream = mContext.openFileInput("document_gallery.json");
             String jsonStr = null;
@@ -37,24 +37,7 @@ public class InternalStorageDocumentRepository implements Repository{
             MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
             jsonStr = Charset.defaultCharset().decode(bb).toString();
             fileInputStream.close();
-            JSONArray jsonArray = new JSONArray(jsonStr);
-            JSONObject documentJson;
-            documents = new ArrayList<Document>(jsonArray.length());
-            // Process each result in json array, decode and convert to business object
-            for (int i = 0; i < jsonArray.length(); i++) {
-                try {
-                    documentJson = jsonArray.getJSONObject(i);
-                } catch (Exception e) {
-                    //TODO
-                    e.printStackTrace();
-                    continue;
-                }
-
-                Document document = Document.fromJson(documentJson);
-                if (document != null) {
-                    documents.add(document);
-                }
-            }
+            documents = JSONDocumentRepository.getAll(jsonStr);
         } catch (Exception e) {
             //TODO
             e.printStackTrace();

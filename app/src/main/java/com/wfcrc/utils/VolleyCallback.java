@@ -3,6 +3,9 @@ package com.wfcrc.utils;
 import android.content.Context;
 import android.util.Log;
 
+import com.wfcrc.repository.JSONDocumentRepository;
+import com.wfcrc.sqlite.WFCRCDB;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -17,7 +20,7 @@ public class VolleyCallback {
         this.mContext = mContext;
     }
 
-    public  void onResponse(String response){
+    /*public  void onResponse(String response){
         Log.d("Volley document request","Response is: "+ response);
         //store json in internal storage
         try {
@@ -25,9 +28,16 @@ public class VolleyCallback {
             fos.write(response.getBytes());
             fos.close();
         } catch (IOException e) {
-            //TODO
             e.printStackTrace();
         }
+    }*/
+
+    public  void onResponse(String response){
+        Log.d("Volley document request","Response is: "+ response);
+        //store documents in database
+        WFCRCDB db = new WFCRCDB(mContext);
+        db.deleteDocuments();
+        db.insertDocuments(JSONDocumentRepository.getAll(response));
     }
 
     public void onError(String error){

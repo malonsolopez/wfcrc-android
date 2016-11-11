@@ -11,6 +11,7 @@ import com.wfcrc.repository.InternalStorageDocumentRepository;
 import com.wfcrc.repository.LocalRawValuesDocumentRepository;
 import com.wfcrc.repository.LocalRawValuesProgramRepository;
 import com.wfcrc.repository.Repository;
+import com.wfcrc.repository.SQLiteDocumentRepository;
 
 /**
  * Created by maria on 10/8/16.
@@ -22,7 +23,8 @@ public class AppConfig extends Application{
     public static Repository<Document> getDocumentRepository(Context context) {
         if(mDocumentRepository == null)
             //mDocumentRepository = new LocalRawValuesDocumentRepository(context);
-            mDocumentRepository = new InternalStorageDocumentRepository(context);
+            //mDocumentRepository = new InternalStorageDocumentRepository(context);
+            mDocumentRepository = new SQLiteDocumentRepository(context);
         return mDocumentRepository;
     }
 
