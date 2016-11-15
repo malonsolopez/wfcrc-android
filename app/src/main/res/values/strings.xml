@@ -88,6 +88,22 @@
     <string name="no_filter">No filter</string>
     <string name="category">Category</string>
 
+    <!-- VOLUNTEER -->
+    <string name="volunteer_title">Volunteer with us</string>
+    <string name="motivation">Why do you want to volunteer with us?</string>
+    <string name="skills">Skills</string>
+    <string-array name="skills_array">
+        <item>Marketing</item>
+        <item>IT</item>
+        <item>Events</item>
+        <item>Fundraising</item>
+        <item>Legal</item>
+        <item>Other</item>
+    </string-array>
+    <string name="diver">Are you a diver?</string>
+    <string name="volunteer_type">How do you want to colaborate?</string>
+    <string name="volunteer">Volunteer</string>
+    <string name="ambassador">Ambassador</string>
 
     <!-- GA -->
     <string name="ga_programs_fragment">Programs Tab</string>
