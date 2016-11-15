@@ -46,12 +46,12 @@ public class WFCRCDB {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
-        String[] projection = {
-                WFCRCContract.Documents._ID,
+        String[] projection = {"*"
+                /*WFCRCContract.Documents._ID,
                 WFCRCContract.Documents.COLUMN_NAME_TITLE,
                 WFCRCContract.Documents.COLUMN_NAME_FORMAT,
                 WFCRCContract.Documents.COLUMN_NAME_CATEGORY,
-                WFCRCContract.Documents.COLUMN_NAME_URL
+                WFCRCContract.Documents.COLUMN_NAME_URL*/
         };
         Cursor cursor = db.query(
                 WFCRCContract.Documents.TABLE_NAME,                     // The table to query
@@ -86,7 +86,7 @@ public class WFCRCDB {
     }
 
     public List<Document> getDocumentsFromTitle(String title){
-        return getDocuments(WFCRCContract.Documents.COLUMN_NAME_TITLE + " = ?", new String[]{title}, null, null, null);
+        return getDocuments(WFCRCContract.Documents.COLUMN_NAME_TITLE + " LIKE \'%" + title + "%\'", null, null, null, null);
     }
 
     public int updateDocument(Document document){
@@ -106,9 +106,9 @@ public class WFCRCDB {
                 whereArgs);
     }
 
-    public void deleteDocuments(){
-        //db.delete(FeedEntry.TABLE_NAME, selection, selectionArgs);
-        //TODO
+    public int deleteDocuments(){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        return db.delete(WFCRCContract.Documents.TABLE_NAME, null, null);
     }
 
 }

@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.wfcrc.adapters.DocumentGalleryAdapter;
 import com.wfcrc.pojos.Document;
+import com.wfcrc.sqlite.WFCRCDB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -150,18 +151,13 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
     // User pressed the search button
     @Override
     public boolean onQueryTextSubmit(String query) {
-        //FIXME
         //get results
-        List<String> results = new ArrayList<String>();
-        for (String title: mIndexTitles) {
-            if(title.contains(query))
-                results.add(title);
-        }
-        if(results.isEmpty()){
+        List<Document> results = getDocumentsFromTitle(query);
+        if(results == null){
             //TODO: SHOW not results
         }else{
             ((LinearLayout)findViewById(R.id.documentGalleryLayout)).removeAllViews();
-            buildDocumentList(getDocumentsFromTitle(results));
+            buildDocumentList(results);
         }
         return false;
     }
@@ -180,9 +176,9 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
         }
     }
 
-    public List<Document> getDocumentsFromTitle(List<String> documentTitles){
-        //TODO
-        return null;
+    public List<Document> getDocumentsFromTitle(String query){
+        WFCRCDB db = new WFCRCDB(this);
+        return db.getDocumentsFromTitle(query);
     }
 
 }
