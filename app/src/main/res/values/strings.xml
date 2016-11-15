@@ -15,6 +15,7 @@
     <string name="donate">Donate</string>
     <string name="webURL"><a href="http://wfcrc.org">http://wfcrc.org</a></string>
     <string name="currency">$</string>
+    <string name="no_results">No results</string>
 
     <!-- RIGHT MENU -->
 
@@ -82,6 +83,11 @@
         <item>Small/Branching</item>
         <item>Corrugated</item>
     </string-array>
+
+    <!-- DOCUMENT GALLERY -->
+    <string name="no_filter">No filter</string>
+    <string name="category">Category</string>
+
 
     <!-- GA -->
     <string name="ga_programs_fragment">Programs Tab</string>

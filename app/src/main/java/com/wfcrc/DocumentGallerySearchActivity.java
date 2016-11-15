@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wfcrc.adapters.DocumentGalleryAdapter;
@@ -52,7 +54,6 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
         setContentView(R.layout.activity_document_gallery_search);
         mDocumentGallery = getIntent().getParcelableArrayListExtra("DocumentGallery");
         mSortedDocumentGallery = Document.sortDocuments(mDocumentGallery);
-        //getIndexTitles();
         createFilterList();
         ((Button)findViewById(R.id.cancelFilter)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,7 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
     }
 
     public void createFilterList(){
+        ((TextView)findViewById(R.id.categoryFilterTitle)).setText(R.string.category);
         Set<String> categories = mSortedDocumentGallery.keySet();
         final ListView filterList = new ListView(this);
         filterList.setVisibility(View.VISIBLE);
@@ -91,7 +93,7 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
                 }
             }
         });
-        ((LinearLayout)findViewById(R.id.documentGalleryLayout)).addView(filterList);
+        ((RelativeLayout)findViewById(R.id.documentGalleryLayout)).addView(filterList);
     }
 
     public void buildDocumentList(List<Document> documents){
@@ -99,14 +101,14 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(DocumentGallerySearchActivity.this);
         newDocumentList.setLayoutManager(mLayoutManager);
         newDocumentList.setAdapter(new DocumentGalleryAdapter(DocumentGallerySearchActivity.this, documents, false));
-        LinearLayout documentGalleryLayout = (LinearLayout) findViewById(R.id.documentGalleryLayout);
+        RelativeLayout documentGalleryLayout = (RelativeLayout) findViewById(R.id.documentGalleryLayout);
         documentGalleryLayout.addView(newDocumentList);
     }
 
     public void cancelFilter(){
         isFiltering = false;
         ((Button)findViewById(R.id.cancelFilter)).setVisibility(View.GONE);
-        ((LinearLayout)findViewById(R.id.documentGalleryLayout)).removeAllViews();
+        ((RelativeLayout)findViewById(R.id.documentGalleryLayout)).removeAllViews();
         createFilterList();
     }
 
@@ -122,7 +124,6 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.document_gallery_search_menu, menu);
-
         // Associate searchable configuration with the SearchView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -138,8 +139,8 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
                     //Find EditText view
                     EditText et = (EditText) findViewById(R.id.search_src_text);
                     //Clear the text from EditText view
-                    et.setText("Search");
-                    ((LinearLayout)findViewById(R.id.documentGalleryLayout)).removeAllViews();
+                    et.setText("");
+                    ((RelativeLayout)findViewById(R.id.documentGalleryLayout)).removeAllViews();
                     createFilterList();
                 }
             });
@@ -152,10 +153,18 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
     public boolean onQueryTextSubmit(String query) {
         //get results
         List<Document> results = getDocumentsFromTitle(query);
+        //show no filters
+        ((TextView)findViewById(R.id.categoryFilterTitle)).setText(R.string.no_filter);
+        //show results (whatever the results)
+        RelativeLayout documentGalleryLayout = (RelativeLayout) findViewById(R.id.documentGalleryLayout);
+        documentGalleryLayout.removeAllViews();
         if(results == null){
-            //TODO: SHOW not results
+            //show not results
+            View noResults = this.getLayoutInflater().inflate(R.layout.no_results_layout, null);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.addRule(RelativeLayout.CENTER_IN_PARENT);
+            documentGalleryLayout.addView(noResults, params);
         }else{
-            ((LinearLayout)findViewById(R.id.documentGalleryLayout)).removeAllViews();
             buildDocumentList(results);
         }
         return false;
