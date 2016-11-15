@@ -44,8 +44,6 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
 
     private HashMap<String, ArrayList<Document>> mSortedDocumentGallery;
 
-    private List<String> mIndexTitles;
-
     private boolean isFiltering = false;
 
     @Override
@@ -54,7 +52,7 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
         setContentView(R.layout.activity_document_gallery_search);
         mDocumentGallery = getIntent().getParcelableArrayListExtra("DocumentGallery");
         mSortedDocumentGallery = Document.sortDocuments(mDocumentGallery);
-        getIndexTitles();
+        //getIndexTitles();
         createFilterList();
         ((Button)findViewById(R.id.cancelFilter)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +75,8 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
                 //get selected category
                 String selectedCategory = (String)adapterView.getItemAtPosition(i);
                 //get documents for that category
-                ArrayList<Document> filteredDocuments = (ArrayList<Document>) mSortedDocumentGallery.get(selectedCategory);
+                WFCRCDB db = new WFCRCDB(DocumentGallerySearchActivity.this);
+                ArrayList<Document> filteredDocuments = (ArrayList<Document>)db.getDocumentsFromCategory(selectedCategory);
                 //set new title and show cancel button
                 ((TextView)findViewById(R.id.categoryFilterTitle)).setText(selectedCategory);
                 ((Button)findViewById(R.id.cancelFilter)).setVisibility(View.VISIBLE);
@@ -166,14 +165,6 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
     public boolean onQueryTextChange(String newText) {
         // User changed the text
         return false;
-    }
-
-    public void getIndexTitles(){
-        //FIXME
-        mIndexTitles = new ArrayList<String>();
-        for (Document document: mDocumentGallery) {
-            mIndexTitles.add(document.getTitle());
-        }
     }
 
     public List<Document> getDocumentsFromTitle(String query){
