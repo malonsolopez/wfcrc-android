@@ -107,6 +107,8 @@
     <string name="attach_cv">Attach CV</string>
     <string name="volunteer_email_chooser">Send volunteer form by email</string>
     <string name="volunteer_address">malonsolopez@gmail.com</string>
+    <string name="not_filled">This field is mandatory</string>
+    <string name="subject">This field is mandatory</string>
 
     <!-- GA -->
     <string name="ga_programs_fragment">Programs Tab</string>

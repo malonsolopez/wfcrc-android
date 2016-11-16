@@ -3,6 +3,7 @@ package com.wfcrc;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,7 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,7 +24,7 @@ public class VolunteerActivity extends AppCompatActivity {
 
     public static final int PICKFILE_REQUEST_CODE = 1;
 
-    private String mCV = null;
+    private VolunteerForm volunteerForm = new VolunteerForm();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,9 @@ public class VolunteerActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.attachCVButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //remove not attached error if necessary
+                ((Button)view).setError(null);
+                //attach
                 FormUtils.attachFile(VolunteerActivity.this, PICKFILE_REQUEST_CODE);
             }
         });
@@ -49,7 +56,7 @@ public class VolunteerActivity extends AppCompatActivity {
                 //hide attached cv
                 findViewById(R.id.cvLayout).setVisibility(View.GONE);
                 //clear old cv
-                mCV = null;
+                volunteerForm.cv = null;
             }
         });
         //toolbar
@@ -60,13 +67,15 @@ public class VolunteerActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == PICKFILE_REQUEST_CODE/* && resultCode == RESULT_OK*/){
+        if(requestCode == PICKFILE_REQUEST_CODE && data != null /* && resultCode == RESULT_OK*/){
             //hide attach button
             findViewById(R.id.attachCVButton).setVisibility(View.GONE);
             //show attached cv
             findViewById(R.id.cvLayout).setVisibility(View.VISIBLE);
-            mCV = data.getDataString();
-            ((TextView)findViewById(R.id.cvTextView)).setText(mCV);
+            volunteerForm.cv = data.getDataString();
+            ((TextView)findViewById(R.id.cvTextView)).setText(volunteerForm.cv);
+        }else{
+            //TODO
         }
         //super.onActivityResult(requestCode, resultCode, data);
     }
@@ -87,12 +96,13 @@ public class VolunteerActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.sendFeedback:
-                // TODO: retrieve data from form and make sure all fields are filled
-                try {
-                    FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), "subject", "body", mCV);
-                } catch (ActivityNotFoundException e) {
-                    //TODO
-                    e.printStackTrace();
+                if(retrieveDataFromForm()) {
+                    try {
+                        FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), "subject", volunteerForm.toString(), volunteerForm.cv);
+                    } catch (ActivityNotFoundException e) {
+                        //TODO
+                        e.printStackTrace();
+                    }
                 }
                 return true;
             default:
@@ -100,6 +110,100 @@ public class VolunteerActivity extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
+        }
+    }
+
+    public boolean retrieveDataFromForm(){
+        boolean isComplete = true;
+        //getData
+        volunteerForm.name = ((EditText)findViewById(R.id.editTextName)).getText().toString();
+        volunteerForm.lastName = ((EditText)findViewById(R.id.editTextLastName)).getText().toString();
+        volunteerForm.phone = ((EditText)findViewById(R.id.editTextPhone)).getText().toString();
+        if (((RadioButton)findViewById(R.id.radioButtonVolunteer)).isChecked())
+            volunteerForm.volunteerType = getString(R.string.volunteer);
+        else
+            volunteerForm.volunteerType = getString(R.string.ambassador);
+        volunteerForm.skill = ((Spinner)findViewById(R.id.spinnerVolunteerSkill)).getSelectedItem().toString();
+        volunteerForm.diver = ((CheckBox)findViewById(R.id.diverCheckBox)).isChecked();
+        volunteerForm.motivation = ((TextInputEditText)findViewById(R.id.editTextComments)).getText().toString();
+        //verify that the it' filled
+        if(volunteerForm.name.isEmpty()){
+            ((EditText)findViewById(R.id.editTextName)).setError(getString(R.string.not_filled));
+            isComplete =  false;
+        }
+        if(volunteerForm.lastName.isEmpty()){
+            ((EditText)findViewById(R.id.editTextLastName)).setError(getString(R.string.not_filled));
+            isComplete =  false;
+        }
+        if(volunteerForm.phone.isEmpty()){
+            ((EditText)findViewById(R.id.editTextPhone)).setError(getString(R.string.not_filled));
+            isComplete =  false;
+        }
+        if(volunteerForm.cv == null){
+            ((Button)findViewById(R.id.attachCVButton)).setError(getString(R.string.not_filled));
+            isComplete =  false;
+        }
+        if(volunteerForm.motivation.isEmpty()){
+            ((TextInputEditText)findViewById(R.id.editTextComments)).setError(getString(R.string.not_filled));
+            isComplete =  false;
+        }
+        return isComplete;
+    }
+
+    private class VolunteerForm{
+
+        private static final String COLON = ": ";
+        private static final String NEW_LINE = "\n";
+
+        private String name;
+        private String lastName;
+        private String phone;
+        //private String email;
+        private String volunteerType;
+        private String skill;
+        private boolean diver;
+        private String cv = null;
+        private String motivation;
+
+        @Override
+        public String toString() {
+            StringBuffer volunteer = new StringBuffer();
+            //name
+            volunteer.append(getString(R.string.name));
+            volunteer.append(COLON);
+            volunteer.append(name);
+            volunteer.append(NEW_LINE);
+            //last name
+            volunteer.append(getString(R.string.last_name));
+            volunteer.append(COLON);
+            volunteer.append(lastName);
+            volunteer.append(NEW_LINE);
+            //phone
+            volunteer.append(getString(R.string.phone));
+            volunteer.append(COLON);
+            volunteer.append(phone);
+            volunteer.append(NEW_LINE);
+            //volunteer type
+            volunteer.append(getString(R.string.volunteer_type));
+            volunteer.append(COLON);
+            volunteer.append(volunteerType);
+            volunteer.append(NEW_LINE);
+            //skill
+            volunteer.append(getString(R.string.skills));
+            volunteer.append(COLON);
+            volunteer.append(skill);
+            volunteer.append(NEW_LINE);
+            //diver
+            volunteer.append(getString(R.string.diver));
+            volunteer.append(COLON);
+            volunteer.append(diver);
+            volunteer.append(NEW_LINE);
+            //comments
+            volunteer.append(getString(R.string.motivation));
+            volunteer.append(COLON);
+            volunteer.append(motivation);
+            volunteer.append(NEW_LINE);
+            return volunteer.toString();
         }
     }
 }
