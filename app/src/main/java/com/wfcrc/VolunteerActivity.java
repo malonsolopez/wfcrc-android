@@ -89,7 +89,7 @@ public class VolunteerActivity extends AppCompatActivity {
             case R.id.sendFeedback:
                 // TODO: retrieve data from form and make sure all fields are filled
                 try {
-                    FormUtils.sendFormByEmail(this, "subject", "body", null);
+                    FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), "subject", "body", mCV);
                 } catch (ActivityNotFoundException e) {
                     //TODO
                     e.printStackTrace();
