@@ -104,6 +104,7 @@
     <string name="volunteer_type">How do you want to colaborate?</string>
     <string name="volunteer">Volunteer</string>
     <string name="ambassador">Ambassador</string>
+    <string name="attach_cv">Attach CV</string>
 
     <!-- GA -->
     <string name="ga_programs_fragment">Programs Tab</string>

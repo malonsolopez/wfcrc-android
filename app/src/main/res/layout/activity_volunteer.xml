@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.wfcrc.FeedbackActivity">
+    tools:context="com.wfcrc.VolunteerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         >
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/feedbackToolbar"
+            android:id="@+id/volunteerToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -177,34 +177,31 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="@string/skills"
-                android:id="@+id/textView4"
-                android:textSize="16sp"
-                android:layout_marginLeft="48dp"/>
-
-            <Spinner
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:id="@+id/spinnerAbundantCoral"
-                android:layout_marginLeft="48dp"/>
+                android:orientation="horizontal">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="@string/diver"
-                android:id="@+id/diverCheckBox"
-                android:textSize="16sp"
-                android:layout_marginLeft="48dp"/>
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="0">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="@string/volunteer_type"
-                android:textSize="16sp"
-                android:layout_marginLeft="48dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_build_black_24dp"
+                        android:layout_gravity="center_vertical|center_horizontal"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="@string/volunteer_type"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
 
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
@@ -230,13 +227,84 @@
 
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/skills"
+                android:id="@+id/textView4"
+                android:textSize="16sp"
+                android:layout_marginLeft="48dp"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/spinnerVolunteerSkill"
+                android:layout_marginLeft="48dp"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/diver"
+                android:id="@+id/diverCheckBox"
+                android:textSize="16sp"
+                android:layout_marginLeft="48dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="0">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_attach_file_black_24dp"
+                        android:layout_gravity="center_vertical|center_horizontal"/>
+
+                </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/attachCVButton"
+                android:text="@string/attach_cv"
+                android:visibility="visible"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/cvLayout"
+                android:background="@android:color/darker_gray">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ATTACHED CV"
+                    android:id="@+id/cvTextView"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_clear_black_24dp"
+                    android:id="@+id/removeAttachedCVButton"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+                </LinearLayout>
+
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            />
+            android:background="@android:color/darker_gray"/>
 
 
         <LinearLayout
