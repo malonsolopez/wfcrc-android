@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.nav_volunteer) {
             Intent volunteerIntent = new Intent(this, VolunteerActivity.class);
             startActivity(volunteerIntent);
+            closeDrawer();
             return true;
         }
         try {
@@ -125,9 +126,13 @@ public class MainActivity extends AppCompatActivity
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content, fragment).commit();
+        closeDrawer();
+        return true;
+    }
+
+    public void closeDrawer(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void onFragmentInteraction(Uri uri){
