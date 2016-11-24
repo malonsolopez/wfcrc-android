@@ -78,7 +78,7 @@ public class VolunteerActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.cvTextView)).setText(volunteerForm.cv);
         }else if(requestCode == SENDEMAIL_REQUEST_CODE){
             //NOTE THAT WE CANNOT VERIFY IF SENDING WENT WELL BECAUSE ANDROID ALWAYS RETURNS 0 AS RESULT CODE
-            Toast.makeText(this, "That's for your submission. We'll keep in touch.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.volunteer_end), Toast.LENGTH_LONG).show();
             this.finish();
         }else{
             //TODO
@@ -104,7 +104,7 @@ public class VolunteerActivity extends AppCompatActivity {
             case R.id.sendFeedback:
                 if(retrieveDataFromForm()) {
                     try {
-                        FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), "subject", volunteerForm.toString(), volunteerForm.cv,
+                        FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), getString(R.string.email_subject), volunteerForm.toString(), volunteerForm.cv,
                                 SENDEMAIL_REQUEST_CODE);
                     } catch (ActivityNotFoundException e) {
                         //TODO

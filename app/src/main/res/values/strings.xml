@@ -109,6 +109,8 @@
     <string name="volunteer_address">malonsolopez@gmail.com</string>
     <string name="not_filled">This field is mandatory</string>
     <string name="subject">This field is mandatory</string>
+    <string name="email_subject">I want to be a volunteer</string>
+    <string name="volunteer_end">Thank\'s for your submission. We\'ll keep in touch.</string>
 
     <!-- GA -->
     <string name="ga_programs_fragment">Programs Tab</string>
