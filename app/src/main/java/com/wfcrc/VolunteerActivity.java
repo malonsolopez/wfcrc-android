@@ -17,12 +17,14 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wfcrc.utils.FormUtils;
 
 public class VolunteerActivity extends AppCompatActivity {
 
     public static final int PICKFILE_REQUEST_CODE = 1;
+    public static final int SENDEMAIL_REQUEST_CODE = 2;
 
     private VolunteerForm volunteerForm = new VolunteerForm();
 
@@ -67,13 +69,17 @@ public class VolunteerActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == PICKFILE_REQUEST_CODE && data != null /* && resultCode == RESULT_OK*/){
+        if(requestCode == PICKFILE_REQUEST_CODE && data != null /* && resultCode == RESULT_OK*/) {
             //hide attach button
             findViewById(R.id.attachCVButton).setVisibility(View.GONE);
             //show attached cv
             findViewById(R.id.cvLayout).setVisibility(View.VISIBLE);
             volunteerForm.cv = data.getDataString();
-            ((TextView)findViewById(R.id.cvTextView)).setText(volunteerForm.cv);
+            ((TextView) findViewById(R.id.cvTextView)).setText(volunteerForm.cv);
+        }else if(requestCode == SENDEMAIL_REQUEST_CODE){
+            //NOTE THAT WE CANNOT VERIFY IF SENDING WENT WELL BECAUSE ANDROID ALWAYS RETURNS 0 AS RESULT CODE
+            Toast.makeText(this, "That's for your submission. We'll keep in touch.", Toast.LENGTH_LONG).show();
+            this.finish();
         }else{
             //TODO
         }
@@ -98,7 +104,8 @@ public class VolunteerActivity extends AppCompatActivity {
             case R.id.sendFeedback:
                 if(retrieveDataFromForm()) {
                     try {
-                        FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), "subject", volunteerForm.toString(), volunteerForm.cv);
+                        FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), "subject", volunteerForm.toString(), volunteerForm.cv,
+                                SENDEMAIL_REQUEST_CODE);
                     } catch (ActivityNotFoundException e) {
                         //TODO
                         e.printStackTrace();
