@@ -24,7 +24,7 @@ public class FeedbackActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         //toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.feedbackToolbar);
-        myToolbar.setNavigationIcon(R.drawable.ic_clear_black_24dp);
+        myToolbar.setNavigationIcon(R.drawable.ic_clear_white_24dp);
         setSupportActionBar(myToolbar);
     }
 

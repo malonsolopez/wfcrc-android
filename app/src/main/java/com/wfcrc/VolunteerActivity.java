@@ -63,7 +63,7 @@ public class VolunteerActivity extends AppCompatActivity {
         });
         //toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.volunteerToolbar);
-        myToolbar.setNavigationIcon(R.drawable.ic_clear_black_24dp);
+        myToolbar.setNavigationIcon(R.drawable.ic_clear_white_24dp);
         setSupportActionBar(myToolbar);
     }
 

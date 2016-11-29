@@ -19,7 +19,8 @@
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/WFCRCTheme"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@android:color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,6 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_person_black_24dp"
+                        android:tint="@color/primary_dark_material_light"
                         android:layout_gravity="center_vertical|center_horizontal"/>
 
                 </LinearLayout>
@@ -100,6 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_phone_black_24dp"
+                        android:tint="@color/primary_dark_material_light"
                         android:layout_gravity="center_vertical|center_horizontal"/>
 
                 </LinearLayout>
@@ -137,6 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_email_black_24dp"
+                        android:tint="@color/primary_dark_material_light"
                         android:layout_gravity="center_vertical|center_horizontal"/>
 
                 </LinearLayout>
@@ -191,6 +195,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_location_on_black_24dp"
+                        android:tint="@color/primary_dark_material_light"
                         android:layout_gravity="center_vertical|center_horizontal"/>
 
                 </LinearLayout>
@@ -263,6 +268,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_spa_black_24dp"
+                        android:tint="@color/primary_dark_material_light"
                         android:layout_gravity="center_vertical|center_horizontal"/>
 
                 </LinearLayout>
@@ -347,6 +353,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_comment_black_24dp"
+                        android:tint="@color/primary_dark_material_light"
                         android:layout_gravity="center_vertical|center_horizontal"/>
 
                 </LinearLayout>
