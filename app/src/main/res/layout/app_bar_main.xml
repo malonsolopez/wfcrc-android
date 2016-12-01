@@ -52,38 +52,81 @@
             android:paddingTop="16dp"
             android:paddingBottom="24dp"
             android:paddingLeft="24dp"
-            android:paddingRight="24dp">
+            android:paddingRight="24dp"
+            android:layout_gravity="center_vertical">
 
-            <ImageButton
-                android:id="@+id/followTWButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/twitter"
-                android:tint="@android:color/darker_gray"
-                android:layout_weight="1"
-                android:background="@null"/>
+                android:orientation="vertical"
+                android:layout_weight="1">
 
-            <ImageButton
-                android:id="@+id/followFBButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/facebook"
-                android:tint="@android:color/darker_gray"
-                android:layout_weight="1"
-                android:background="@null"/>
+                <ImageButton
+                    android:id="@+id/followTWButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/twitter"
+                    android:tint="@android:color/darker_gray"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:layout_gravity="center_horizontal"/>
 
-            <ImageButton
-                android:id="@+id/followLIButton"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:text="Twitter"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/linkedin"
-                android:tint="@android:color/darker_gray"
-                android:layout_weight="1"
-                android:background="@null"/>
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+
+                <ImageButton
+                    android:id="@+id/followFBButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/facebook"
+                    android:tint="@android:color/darker_gray"
+                    android:layout_weight="1"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:text="Facebook"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/followLIButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/linkedin"
+                    android:tint="@android:color/darker_gray"
+                    android:layout_weight="1"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:text="LinkedIn"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-
 
     </android.support.v4.widget.NestedScrollView>
 

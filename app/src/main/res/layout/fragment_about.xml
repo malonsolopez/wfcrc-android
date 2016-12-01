@@ -59,49 +59,6 @@
             android:padding="16dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/follow"
-            android:id="@+id/textView2"
-            android:padding="16dp"
-            android:layout_below="@+id/webLink"
-            android:layout_centerHorizontal="true" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/textView2"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/relativeLayout">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/followFBButton"
-                android:text="Facebook"
-                android:layout_gravity="center_horizontal"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/followLIButton"
-                android:text="LinkedIn"
-                android:layout_gravity="center_horizontal" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/followTWButton"
-                android:text="Twitter"
-                android:layout_gravity="center_horizontal"/>
-
-        </LinearLayout>
-
-
 
     </RelativeLayout>
 

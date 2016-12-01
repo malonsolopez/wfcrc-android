@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.wfcrc.analytics.Analytics;
@@ -41,6 +44,8 @@ public class AboutFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private Analytics mTracker;
+
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -78,30 +83,6 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View aboutView = inflater.inflate(R.layout.fragment_about, container, false);
-        ((Button)aboutView.findViewById(R.id.followTWButton)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_twitter));
-                //GA
-                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_TW));
-            }
-        });
-        ((Button)aboutView.findViewById(R.id.followFBButton)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_facebook));
-                //GA
-                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_FB));
-            }
-        });
-        ((Button)aboutView.findViewById(R.id.followLIButton)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_linkein));
-                //GA
-                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_LI));
-            }
-        });
         ((TextView)aboutView.findViewById(R.id.webLink)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +94,44 @@ public class AboutFragment extends Fragment {
         });
         //custom toolbar with donate option for this fragment
         setHasOptionsMenu(true);
+        //bottom sheet for follow us options
+        View bottomSheet = this.getActivity().findViewById(R.id.bottom_sheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                View fab = getActivity().findViewById(R.id.donate);
+                fab.animate().scaleX(1 - slideOffset).scaleY(1 - slideOffset).setDuration(0).start();
+            }
+        });
+         ((ImageButton)bottomSheet.findViewById(R.id.followTWButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_twitter));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_TW));
+            }
+        });
+        ((ImageButton)bottomSheet.findViewById(R.id.followFBButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_facebook));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_FB));
+            }
+        });
+        ((ImageButton)bottomSheet.findViewById(R.id.followLIButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_linkein));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_LI));
+            }
+        });
         //GA
         mTracker = ((AppConfig)getActivity().getApplication()).getAnalytics();
         mTracker.sendPageView(getString(R.string.ga_about));
@@ -141,6 +160,8 @@ public class AboutFragment extends Fragment {
             (new Share(getActivity(), subject, body)).share();
             //GA
             mTracker.sendEvent(getString(R.string.ga_category_share), getString(R.string.ga_about_share));
+        }else if (id == R.id.follow) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }
 
         return super.onOptionsItemSelected(item);
