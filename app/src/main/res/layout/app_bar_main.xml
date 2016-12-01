@@ -37,4 +37,54 @@
         android:src="@drawable/donate"
         android:tint="@android:color/white"/>
 
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:background="@android:color/white"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="16dp"
+            android:paddingBottom="24dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
+
+            <ImageButton
+                android:id="@+id/followTWButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/twitter"
+                android:tint="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/followFBButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/facebook"
+                android:tint="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/followLIButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/linkedin"
+                android:tint="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:background="@null"/>
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>
