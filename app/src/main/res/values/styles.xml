@@ -26,24 +26,24 @@
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="WFCRCTheme" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="colorPrimary">@color/material_deep_teal_500</item>
-        <item name="colorAccent">@color/material_deep_teal_500</item>
-        <item name="colorPrimaryDark">@color/material_teal_800</item>
+        <item name="colorPrimary">#38B4E6</item>
+        <item name="colorAccent">#38B4E6</item>
+        <item name="colorPrimaryDark">#1995C8</item>
     </style>
 
     <style name="WFCRCTheme2" parent="Theme.AppCompat.Light" >
         <item name="colorPrimary">@android:color/transparent</item>
-        <item name="colorAccent">@color/material_deep_teal_500</item>
-        <item name="colorPrimaryDark">@color/material_teal_800</item>
+        <item name="colorAccent">#38B4E6</item>
+        <item name="colorPrimaryDark">#1995C8</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBarOverlay">true</item>
 
     </style>
 
     <style name="WFCRCTheme3" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="colorPrimary">@color/material_deep_teal_500</item>
-        <item name="colorAccent">@color/material_deep_teal_500</item>
-        <item name="colorPrimaryDark">@color/material_teal_800</item>
+        <item name="colorPrimary">#38B4E6</item>
+        <item name="colorAccent">#38B4E6</item>
+        <item name="colorPrimaryDark">#1995C8</item>
     </style>
 
 
