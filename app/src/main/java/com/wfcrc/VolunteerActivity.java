@@ -36,8 +36,9 @@ public class VolunteerActivity extends AppCompatActivity {
         //skills spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinnerVolunteerSkill);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.skills_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.skills_array, /*android.R.layout.simple_spinner_item*/R.layout.wfcrc_spinner_dropdown_view);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.wfcrc_spinner_dropdown_view);
         spinner.setAdapter(adapter);
         //attach cv button
         ((Button)findViewById(R.id.attachCVButton)).setOnClickListener(new View.OnClickListener() {
