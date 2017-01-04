@@ -33,12 +33,12 @@
             android:layout_below="@+id/aboutImage"
             android:layout_alignParentStart="true"
             android:textSize="24sp"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/aboutDescription"
             android:id="@+id/aboutDescription"
             android:layout_alignParentStart="true"

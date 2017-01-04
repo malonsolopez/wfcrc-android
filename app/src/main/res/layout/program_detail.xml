@@ -30,12 +30,12 @@
                 android:layout_below="@+id/programImage"
                 android:layout_alignParentStart="true"
                 android:textSize="24sp"
-                android:padding="16dp" />
+                android:padding="16dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Lorem ipsum dolor sit amet, esse novum principes eos id, est ne tota partiendo. Eam omnes qualisque ut, id qui aeque theophrastus, no ipsum dicunt mea."
                 android:id="@+id/programDescription"
                 android:layout_alignParentStart="true"
