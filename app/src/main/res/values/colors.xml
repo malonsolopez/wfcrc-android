@@ -5,4 +5,6 @@
     <color name="colorAccent">#ff8a80</color>
     <color name="material_teal_800">#00695c</color>
     <color name="material_gray_300">#ffe0e0e0</color>
+    <color name="wfcrc_blue">#38B4E6</color>
+    <color name="wfcrc_blue_dark">#1995C8</color>
 </resources>
