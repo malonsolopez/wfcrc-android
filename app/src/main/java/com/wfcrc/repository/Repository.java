@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface Repository<T> {
 
-    List<T> getAll();
+    List<T> getAll() throws RepositoryException;
 
 }

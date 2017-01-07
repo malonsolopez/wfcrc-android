@@ -28,7 +28,7 @@ public class LocalRawValuesProgramRepository implements Repository {
     }
 
     @Override
-    public List<Program> getAll() {
+    public List<Program> getAll()   throws RepositoryException{
         String strJson = JSONUtils.loadJSONFromAsset(mContext, R.raw.programs);
         ArrayList<Program> programs = new ArrayList<Program>();
         try {
@@ -42,7 +42,6 @@ public class LocalRawValuesProgramRepository implements Repository {
                 try {
                     programJson = jsonArray.getJSONObject(i);
                 } catch (Exception e) {
-                    //TODO
                     e.printStackTrace();
                     continue;
                 }
@@ -53,8 +52,8 @@ public class LocalRawValuesProgramRepository implements Repository {
                 }
             }
         }catch (Exception e){
-            //TODO
             e.printStackTrace();
+            throw new RepositoryException(e.getMessage(), e.getCause(), mContext.getString(R.string.programs_error));
         }
         return programs;
     }

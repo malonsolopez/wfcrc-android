@@ -1,5 +1,6 @@
 package com.wfcrc.repository;
 
+import com.wfcrc.R;
 import com.wfcrc.pojos.Document;
 
 import org.json.JSONArray;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class JSONDocumentRepository {
 
-    public static List<Document> getAll(String jsonString) {
+    public static List<Document> getAll(String jsonString) throws RepositoryException {
         ArrayList<Document> documents = new ArrayList<Document>();
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
@@ -24,7 +25,6 @@ public class JSONDocumentRepository {
                 try {
                     documentJson = jsonArray.getJSONObject(i);
                 } catch (Exception e) {
-                    //TODO
                     e.printStackTrace();
                     continue;
                 }
@@ -35,8 +35,8 @@ public class JSONDocumentRepository {
                 }
             }
         }catch (Exception e){
-            //TODO
             e.printStackTrace();
+            throw new RepositoryException(e.getMessage(), e.getCause());
         }
         return documents;
     }

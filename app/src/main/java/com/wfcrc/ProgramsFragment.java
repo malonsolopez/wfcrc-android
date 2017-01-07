@@ -20,6 +20,7 @@ import com.wfcrc.adapters.ProgramCardAdapter;
 import com.wfcrc.analytics.Analytics;
 import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Program;
+import com.wfcrc.repository.RepositoryException;
 import com.wfcrc.social.Share;
 
 import org.json.JSONException;
@@ -52,7 +53,7 @@ public class ProgramsFragment extends Fragment {
 
     private View mProgramsFragmentView;
 
-    private List<Program> mPrograms;
+    private List<Program> mPrograms =  null;
 
     private Analytics mTracker;
 
@@ -92,12 +93,16 @@ public class ProgramsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mProgramsFragmentView = inflater.inflate(R.layout.fragment_programs, container, false);
-        mPrograms = AppConfig.getProgramRepository(this.getContext()).getAll();
-        RecyclerView mRecyclerView = (RecyclerView) mProgramsFragmentView.findViewById(R.id.framentProgramsLayout);
-        mRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(new ProgramCardAdapter(this.getContext(), mPrograms));
+        try {
+            mPrograms = AppConfig.getProgramRepository(this.getContext()).getAll();
+            RecyclerView mRecyclerView = (RecyclerView) mProgramsFragmentView.findViewById(R.id.framentProgramsLayout);
+            mRecyclerView.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.setAdapter(new ProgramCardAdapter(this.getContext(), mPrograms));
+        } catch (RepositoryException e) {
+            inflater.inflate(R.layout.no_results_layout, container, false);
+        }
         //GA
         mTracker = ((AppConfig)getActivity().getApplication()).getAnalytics();
         mTracker.sendPageView(getString(R.string.ga_programs_fragment));

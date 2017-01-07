@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
-            //TODO
+            setContentView(R.layout.no_results_layout);
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content, fragment).commit();

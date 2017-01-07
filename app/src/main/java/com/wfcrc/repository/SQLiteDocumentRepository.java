@@ -21,7 +21,7 @@ public class SQLiteDocumentRepository implements Repository {
     }
 
     @Override
-    public List<Document> getAll() {
+    public List<Document> getAll() throws RepositoryException{
         WFCRCDB db = new WFCRCDB(mContext);
         return db.getDocuments();
     }

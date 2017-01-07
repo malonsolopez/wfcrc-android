@@ -28,7 +28,7 @@ public class LocalRawValuesDocumentRepository implements Repository {
     }
 
     @Override
-    public List<Document> getAll() {
+    public List<Document> getAll() throws RepositoryException{
         String strJson = JSONUtils.loadJSONFromAsset(mContext, R.raw.document_gallery_wp);
         return JSONDocumentRepository.getAll(strJson);
     }

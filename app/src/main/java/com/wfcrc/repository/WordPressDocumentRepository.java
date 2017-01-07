@@ -38,7 +38,7 @@ public class WordPressDocumentRepository implements Repository{
     }
 
     @Override
-    public List<Document> getAll() {
+    public List<Document> getAll() throws RepositoryException{
         RequestQueue queue = Volley.newRequestQueue(mContext);
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, DOCUMENT_GALLERY_URL,

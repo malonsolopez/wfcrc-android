@@ -2,6 +2,7 @@ package com.wfcrc.repository;
 
 import android.content.Context;
 
+import com.wfcrc.R;
 import com.wfcrc.pojos.Document;
 
 import org.json.JSONArray;
@@ -28,7 +29,7 @@ public class InternalStorageDocumentRepository implements Repository{
     }
 
     @Override
-    public List<Document> getAll() {
+    public List<Document> getAll()  throws RepositoryException{
         List<Document> documents = new ArrayList<Document>();
         try {
             FileInputStream fileInputStream = mContext.openFileInput("document_gallery.json");
@@ -39,8 +40,8 @@ public class InternalStorageDocumentRepository implements Repository{
             fileInputStream.close();
             documents = JSONDocumentRepository.getAll(jsonStr);
         } catch (Exception e) {
-            //TODO
             e.printStackTrace();
+            throw new RepositoryException(e.getMessage(), e.getCause(), mContext.getString(R.string.document_gallery_error));
         }
         return documents;
     }

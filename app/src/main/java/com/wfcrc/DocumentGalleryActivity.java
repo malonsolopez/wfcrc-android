@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.wfcrc.adapters.DocumentGalleryAdapter;
 import com.wfcrc.config.AppConfig;
@@ -21,21 +22,37 @@ import java.util.Map;
 
 public class DocumentGalleryActivity extends AppCompatActivity {
 
-    private List<Document> mDocumentGallery;
+    private List<Document> mDocumentGallery = null;
 
-    private HashMap<String, ArrayList<Document>> mSortedDocumentGallery;
+    private HashMap<String, ArrayList<Document>> mSortedDocumentGallery = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document_gallery);
-        //get document gallery
-        mDocumentGallery = AppConfig.getDocumentRepository(this).getAll();//TODO: error control
-        //short documents in sublist
-        mSortedDocumentGallery = Document.sortDocuments(mDocumentGallery);//TODO: error control
-        initDocumentGallery();
+        try {
+            //get document gallery
+            mDocumentGallery = AppConfig.getDocumentRepository(this).getAll();
+            //short documents in sublist
+            if (mDocumentGallery != null) {
+                mSortedDocumentGallery = Document.sortDocuments(mDocumentGallery);
+                if(mSortedDocumentGallery != null && !mSortedDocumentGallery.isEmpty())
+                    initDocumentGallery();
+                else
+                    showNoResultsScreen();
+            } else {
+                showNoResultsScreen();
+            }
+        }catch (Exception e){
+            showNoResultsScreen();
+        }
         //GA
         ((AppConfig)getApplication()).getAnalytics().sendPageView(getString(R.string.ga_document_gallery));
+    }
+
+    private void showNoResultsScreen() {
+        setContentView(R.layout.no_results_layout);
+        ((TextView)findViewById(R.id.noResultsTextview)).setText(R.string.document_gallery_error);
     }
 
     private void initDocumentGallery(){
