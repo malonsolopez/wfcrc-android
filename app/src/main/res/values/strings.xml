@@ -90,6 +90,7 @@
     <string name="no_filter">No filter</string>
     <string name="category">Category</string>
     <string name="document_gallery_error">Sorry, something went wrong when accessing the document gallery. Try again later.</string>
+    <string name="document_gallery_search">Search Document Gallery</string>
 
     <!-- VOLUNTEER -->
     <string name="volunteer_title">Volunteer with us</string>

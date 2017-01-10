@@ -9,8 +9,8 @@
 
     <item
         android:id="@+id/search"
-        android:title="@string/share"
+        android:title="@string/document_gallery_search"
         app:showAsAction="always"
-        android:icon="@drawable/ic_menu_share"
+        android:icon="@drawable/ic_search_white_24dp"
         />
 </menu>
