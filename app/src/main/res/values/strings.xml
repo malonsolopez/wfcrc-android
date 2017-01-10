@@ -86,6 +86,7 @@
     </string-array>
 
     <!-- DOCUMENT GALLERY -->
+    <string name="document_gallery_title">Document Gallery</string>
     <string name="no_filter">No filter</string>
     <string name="category">Category</string>
     <string name="document_gallery_error">Sorry, something went wrong when accessing the document gallery. Try again later.</string>

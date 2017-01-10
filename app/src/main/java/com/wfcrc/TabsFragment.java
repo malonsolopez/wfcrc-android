@@ -162,8 +162,6 @@ public class TabsFragment extends Fragment {
                     return inflater.inflate(R.layout.fragment_programs, container, false);
                 case 1:
                     return inflater.inflate(R.layout.fragment_maps, container, false);
-                case 2:
-                    return inflater.inflate(R.layout.fragment_first_response, container, false);
             }
             return inflater.inflate(R.layout.fragment_programs, container, false);
         }
@@ -188,9 +186,7 @@ public class TabsFragment extends Fragment {
                 case 0:
                     return new ProgramsFragment();
                 case 1:
-                    return PlaceholderFragment.newInstance(position);
-                case 2:
-                    return new FirstResponseFragment();
+                    return new DocumentGalleryActivity();
             }
             return new ProgramsFragment();
         }
@@ -198,7 +194,7 @@ public class TabsFragment extends Fragment {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -207,9 +203,7 @@ public class TabsFragment extends Fragment {
                 case 0:
                     return getString(R.string.programs_tab_title);
                 case 1:
-                    return getString(R.string.maps_tab_title);
-                case 2:
-                    return getString(R.string.first_response_tab_title);
+                    return getString(R.string.document_gallery_title);
             }
             return null;
         }

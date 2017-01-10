@@ -49,16 +49,14 @@
 
         <activity android:name=".FeedbackActivity"/>
 
-        <activity android:name=".DocumentGalleryActivity"
-            android:theme="@style/WFCRCTheme3"/>
-        <activity
+        <!--<activity
             android:name=".DocumentGallerySearchActivity"
             android:parentActivityName=".DocumentGalleryActivity"
             android:theme="@style/Theme.AppCompat.Light">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wfcrc.DocumentGalleryActivity" />
-        </activity>
+        </activity>-->
 
         <activity android:name=".VolunteerActivity" />
     </application>

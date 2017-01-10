@@ -1,12 +1,16 @@
 package com.wfcrc;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,62 +24,66 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class DocumentGalleryActivity extends AppCompatActivity {
+public class DocumentGalleryActivity extends Fragment {
+
+    private View mDocumentGalleryFragmentView;
 
     private List<Document> mDocumentGallery = null;
 
     private HashMap<String, ArrayList<Document>> mSortedDocumentGallery = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_document_gallery);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mDocumentGalleryFragmentView = inflater.inflate(R.layout.activity_document_gallery, container, false);
         try {
             //get document gallery
-            mDocumentGallery = AppConfig.getDocumentRepository(this).getAll();
+            mDocumentGallery = AppConfig.getDocumentRepository(this.getContext()).getAll();
             //short documents in sublist
             if (mDocumentGallery != null) {
                 mSortedDocumentGallery = Document.sortDocuments(mDocumentGallery);
-                if(mSortedDocumentGallery != null && !mSortedDocumentGallery.isEmpty())
+                if (mSortedDocumentGallery != null && !mSortedDocumentGallery.isEmpty())
                     initDocumentGallery();
                 else
-                    showNoResultsScreen();
+                    showNoResultsScreen(inflater, container);
             } else {
-                showNoResultsScreen();
+                showNoResultsScreen(inflater, container);
             }
-        }catch (Exception e){
-            showNoResultsScreen();
+        } catch (Exception e) {
+            showNoResultsScreen(inflater, container);
         }
         //GA
-        ((AppConfig)getApplication()).getAnalytics().sendPageView(getString(R.string.ga_document_gallery));
+        ((AppConfig)getActivity().getApplication()).getAnalytics().sendPageView(getString(R.string.ga_document_gallery));
+        return mDocumentGalleryFragmentView;
     }
 
-    private void showNoResultsScreen() {
-        setContentView(R.layout.no_results_layout);
-        ((TextView)findViewById(R.id.noResultsTextview)).setText(R.string.document_gallery_error);
+    private void showNoResultsScreen(LayoutInflater inflater, ViewGroup container) {
+        mDocumentGalleryFragmentView = inflater.inflate(R.layout.no_results_layout, container, false);
+        ((TextView) mDocumentGalleryFragmentView.findViewById(R.id.noResultsTextview)).setText(R.string.document_gallery_error);
     }
 
-    private void initDocumentGallery(){
-        LinearLayout documentGalleryLayout = (LinearLayout) findViewById(R.id.documentGalleryLayout);
+    private void initDocumentGallery() {
+        LinearLayout documentGalleryLayout = (LinearLayout) mDocumentGalleryFragmentView.findViewById(R.id.documentGalleryLayout);
         //create list per each category
         Iterator iterator = mSortedDocumentGallery.entrySet().iterator();
-        while(iterator.hasNext()){
-            Map.Entry documents = (Map.Entry)iterator.next();
+        while (iterator.hasNext()) {
+            Map.Entry documents = (Map.Entry) iterator.next();
             //list of documents for this category
-            ArrayList<Document> documentList = (ArrayList<Document>)documents.getValue();
+            ArrayList<Document> documentList = (ArrayList<Document>) documents.getValue();
             //the category (title) is going to be the first element in form of an imaginary document, so the adapter can draw it as the title
             documentList.add(0, new Document(documents.getKey().toString(), null, null, null));
             if (documentList != null) {
-                RecyclerView newDocumentList = new RecyclerView(this);
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+                Context context = getContext();
+                RecyclerView newDocumentList = new RecyclerView(context);
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
                 newDocumentList.setLayoutManager(mLayoutManager);
-                newDocumentList.setAdapter(new DocumentGalleryAdapter(this, documentList, true));
+                newDocumentList.setAdapter(new DocumentGalleryAdapter(context, documentList, true));
                 documentGalleryLayout.addView(newDocumentList);
             }
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.document_gallery_menu, menu);
@@ -95,6 +103,6 @@ public class DocumentGalleryActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 }
