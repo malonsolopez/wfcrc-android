@@ -112,7 +112,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            Intent feedbackActivity = new Intent(this, FeedbackActivity.class);
+            startActivity(feedbackActivity);
+            closeDrawer();
+            return true;
         }else if (id == R.id.nav_volunteer) {
             Intent volunteerIntent = new Intent(this, VolunteerActivity.class);
             startActivity(volunteerIntent);
