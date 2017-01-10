@@ -16,6 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.wfcrc.config.AppConfig;
+import com.wfcrc.pojos.Document;
+import com.wfcrc.repository.RepositoryException;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -77,7 +83,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -89,8 +95,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.search) {
+            try {
+                Intent intent = new Intent(this, DocumentGallerySearchActivity.class);
+                intent.putParcelableArrayListExtra("DocumentGallery",
+                        (ArrayList<Document>) AppConfig.getDocumentRepository(this).getAll());
+                startActivity(intent);
+            } catch (RepositoryException e) {
+                //TODO
+                e.printStackTrace();
+            }
         }
 
         return super.onOptionsItemSelected(item);
