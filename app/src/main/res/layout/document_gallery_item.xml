@@ -17,7 +17,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:id="@+id/documentIcon"
-            android:src="@drawable/ic_picture_as_pdf_black_24dp"
+            android:src="@drawable/ic_folder_black_24dp"
             android:tint="@color/primary_dark_material_light"/>
 
         <TextView

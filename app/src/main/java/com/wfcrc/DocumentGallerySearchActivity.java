@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wfcrc.adapters.DocumentGalleryAdapter;
+import com.wfcrc.adapters.DocumentGalleryFilterAdapter;
 import com.wfcrc.pojos.Document;
 import com.wfcrc.sqlite.WFCRCDB;
 
@@ -68,8 +69,8 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
         Set<String> categories = mSortedDocumentGallery.keySet();
         final ListView filterList = new ListView(this);
         filterList.setVisibility(View.VISIBLE);
-        ArrayAdapter<String> filterListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>(categories));
-        filterList.setAdapter(filterListAdapter);
+        //ArrayAdapter<String> filterListAdapter = new ArrayAdapter<String>(this, R.layout.document_gallery_filter_list_item, new ArrayList<String>(categories));
+        filterList.setAdapter(new DocumentGalleryFilterAdapter(this, new ArrayList<String>(categories)));
         filterList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
