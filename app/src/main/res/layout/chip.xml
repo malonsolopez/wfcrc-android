@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="32dp"
+    android:background="@drawable/round_corner_layout"
+    android:backgroundTint="@color/material_gray_300">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Chip"
+        android:paddingLeft="12dp"
+        android:gravity="center_vertical"
+        android:id="@+id/chipLabel"/>
+
+    <Button
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_cancel_black_24dp"
+        android:backgroundTint="@color/black54"
+
+        android:id="@+id/chipCancelButton"/>
+
+</LinearLayout>

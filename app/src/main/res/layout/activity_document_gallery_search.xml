@@ -11,7 +11,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:id="@+id/filterHeaderLayout"
+        android:paddingLeft="8dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -20,16 +22,15 @@
             android:text="Category"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:paddingLeft="8dp"
             android:textStyle="bold"/>
 
-        <Button
+        <include layout="@layout/chip"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:id="@+id/cancelFilter"
-            android:text="CANCEL"
-            android:visibility="gone"/>
+            android:layout_height="32dp"
+            android:id="@+id/filterChip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            />
 
     </RelativeLayout>
 

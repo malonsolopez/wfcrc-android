@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:text="New Text"
             android:id="@+id/documentTitle"
-            android:layout_marginStart="72dp"
+            android:layout_marginStart="56dp"
             android:layout_marginEnd="16dp"
             android:textSize="13sp"
             android:gravity="center_vertical"/>
@@ -46,6 +46,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray"
+        android:id="@+id/rowBottomSeparator"/>
 
 </LinearLayout>

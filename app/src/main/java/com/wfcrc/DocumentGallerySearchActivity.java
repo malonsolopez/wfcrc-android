@@ -56,7 +56,8 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
         mDocumentGallery = getIntent().getParcelableArrayListExtra("DocumentGallery");
         mSortedDocumentGallery = Document.sortDocuments(mDocumentGallery);
         createFilterList();
-        ((Button)findViewById(R.id.cancelFilter)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.filterChip).setVisibility(View.GONE);
+        ((Button)findViewById(R.id.chipCancelButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cancelFilter();
@@ -81,8 +82,10 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
                 WFCRCDB db = new WFCRCDB(DocumentGallerySearchActivity.this);
                 ArrayList<Document> filteredDocuments = (ArrayList<Document>)db.getDocumentsFromCategory(selectedCategory);
                 //set new title and show cancel button
-                ((TextView)findViewById(R.id.categoryFilterTitle)).setText(selectedCategory);
-                ((Button)findViewById(R.id.cancelFilter)).setVisibility(View.VISIBLE);
+                findViewById(R.id.filterChip).setVisibility(View.VISIBLE);
+                ((TextView)findViewById(R.id.chipLabel)).setText(selectedCategory);
+                //((RelativeLayout)findViewById(R.id.filterHeaderLayout)).addView(getLayoutInflater().inflate(R.layout.chip, null,false));
+                ((Button)findViewById(R.id.chipCancelButton)).setVisibility(View.VISIBLE);
                 //show documents
                 filterList.setVisibility(View.GONE);
                 //the category (title) is going to be the first element in form of an imaginary document, so the adapter can draw it as the title
@@ -106,9 +109,11 @@ public class DocumentGallerySearchActivity extends AppCompatActivity
         documentGalleryLayout.addView(newDocumentList);
     }
 
+
+
     public void cancelFilter(){
         isFiltering = false;
-        ((Button)findViewById(R.id.cancelFilter)).setVisibility(View.GONE);
+        findViewById(R.id.filterChip).setVisibility(View.GONE);
         ((RelativeLayout)findViewById(R.id.documentGalleryLayout)).removeAllViews();
         createFilterList();
     }

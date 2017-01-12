@@ -51,6 +51,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         ImageView documentIcon;
         TextView documentTitle;
         ImageView documentSync;
+        View rowBottomSeparator;
 
 
         public ItemHolder(View itemView) {
@@ -58,6 +59,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             documentIcon = (ImageView) itemView.findViewById(R.id.documentIcon);
             documentTitle = (TextView) itemView.findViewById(R.id.documentTitle);
             documentSync = (ImageView) itemView.findViewById(R.id.documentSync);
+            rowBottomSeparator = (View) itemView.findViewById(R.id.rowBottomSeparator);
             itemView.setOnClickListener(this);
         }
 
@@ -112,6 +114,8 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             //((ItemHolder)holder).documentIcon.setImageResource(imageId);
             ((ItemHolder) holder).documentTitle.setText(document.getTitle());
             //((ItemHolder)holder).documentSync.setImageResource(imageId);
+            if(position == getItemCount()-1)
+                ((ItemHolder) holder).rowBottomSeparator.setVisibility(View.GONE);
         }
     }
 
