@@ -97,6 +97,7 @@ public class AboutFragment extends Fragment {
         //bottom sheet for follow us options
         View bottomSheet = this.getActivity().findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -130,6 +131,13 @@ public class AboutFragment extends Fragment {
                 new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_linkein));
                 //GA
                 mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_LI));
+            }
+        });
+        //hide bottom sheet when click on the screen
+        aboutView.findViewById(R.id.aboutMainLayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
         //GA
