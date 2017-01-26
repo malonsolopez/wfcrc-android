@@ -13,17 +13,26 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "WFCRC.db";
 
     private static final String TEXT_TYPE = " TEXT";
+    private static final String BOOLEAN_TYPE = " BOOLEAN";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + WFCRCContract.Documents.TABLE_NAME + " (" +
-                    WFCRCContract.Documents._ID + " INTEGER PRIMARY KEY," +
+                    WFCRCContract.Documents.COLUMN_NAME_ID + " INTEGER PRIMARY KEY," +
                     WFCRCContract.Documents.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     WFCRCContract.Documents.COLUMN_NAME_FORMAT + TEXT_TYPE + COMMA_SEP +
                     WFCRCContract.Documents.COLUMN_NAME_CATEGORY + TEXT_TYPE + COMMA_SEP +
-                    WFCRCContract.Documents.COLUMN_NAME_URL + TEXT_TYPE + " )";
+                    WFCRCContract.Documents.COLUMN_NAME_URL + TEXT_TYPE + COMMA_SEP +
+                    WFCRCContract.Documents.COLUMN_NAME_DOWNLOADED + BOOLEAN_TYPE + " )";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + WFCRCContract.Documents.TABLE_NAME;
+
+//    private static final String SQL_UPDATE_ENTRIES =
+//            "UPDATE " + WFCRCContract.Documents.TABLE_NAME + " SET ";
+//
+//
+//    UPDATE COMPANY SET ADDRESS = 'Texas' WHERE ID = 6;
+
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

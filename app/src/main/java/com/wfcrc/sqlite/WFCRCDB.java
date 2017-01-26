@@ -27,10 +27,12 @@ public class WFCRCDB {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
+        values.put(WFCRCContract.Documents.COLUMN_NAME_ID, document.getId());
         values.put(WFCRCContract.Documents.COLUMN_NAME_TITLE, document.getTitle());
         values.put(WFCRCContract.Documents.COLUMN_NAME_FORMAT, document.getFormat());
         values.put(WFCRCContract.Documents.COLUMN_NAME_CATEGORY, document.getCategory());
         values.put(WFCRCContract.Documents.COLUMN_NAME_URL, document.getUrl());
+        values.put(WFCRCContract.Documents.COLUMN_NAME_DOWNLOADED, document.isDownloaded());
         // Insert the new row, returning the primary key value of the new row
         return db.insert(WFCRCContract.Documents.TABLE_NAME, null, values);
     }
@@ -65,10 +67,12 @@ public class WFCRCDB {
         //cursor.moveToFirst();
         while(cursor.moveToNext()){
             Document doc = new Document();
+            doc.setId(cursor.getInt(cursor.getColumnIndexOrThrow(WFCRCContract.Documents.COLUMN_NAME_ID)));
             doc.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(WFCRCContract.Documents.COLUMN_NAME_TITLE)));
             doc.setFormat(cursor.getString(cursor.getColumnIndexOrThrow(WFCRCContract.Documents.COLUMN_NAME_FORMAT)));
             doc.setCategory(cursor.getString(cursor.getColumnIndexOrThrow(WFCRCContract.Documents.COLUMN_NAME_CATEGORY)));
             doc.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(WFCRCContract.Documents.COLUMN_NAME_URL)));
+            doc.setDownloaded(cursor.getInt(cursor.getColumnIndexOrThrow(WFCRCContract.Documents.COLUMN_NAME_DOWNLOADED)) ==  0 ? false:true);
             if (returnDocuments == null){
                 returnDocuments = new ArrayList<Document>();
             }
@@ -93,12 +97,13 @@ public class WFCRCDB {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         // New value for one column
         ContentValues values = new ContentValues();
+        values.put(WFCRCContract.Documents.COLUMN_NAME_ID, document.getId());
         values.put(WFCRCContract.Documents.COLUMN_NAME_TITLE, document.getTitle());
         values.put(WFCRCContract.Documents.COLUMN_NAME_FORMAT, document.getFormat());
         values.put(WFCRCContract.Documents.COLUMN_NAME_CATEGORY, document.getCategory());
         values.put(WFCRCContract.Documents.COLUMN_NAME_URL, document.getUrl());
-        String where = WFCRCContract.Documents.COLUMN_NAME_TITLE + " LIKE ?";
-        String[] whereArgs = {document.getTitle()};
+        String where = WFCRCContract.Documents.COLUMN_NAME_ID + " LIKE ?";
+        String[] whereArgs = {Integer.toString(document.getId())};
         return db.update(
                 WFCRCContract.Documents.TABLE_NAME,
                 values,

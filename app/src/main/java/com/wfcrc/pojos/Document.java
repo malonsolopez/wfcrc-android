@@ -6,31 +6,45 @@ import android.os.Parcelable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.DOMConfiguration;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by maria on 8/29/16.
  */
 public class Document implements Serializable, Parcelable{
 
+    private int id;
     private String title;
     private String format;
     private String category;
     private String url;
+    private boolean downloaded = false;
 
     public Document(){
 
     }
 
-    public Document(String title, String format, String category, String url) {
+    public Document(int id, String title, String format, String category, String url, boolean downloaded) {
+        this.id = id;
         this.title = title;
         this.format = format;
         this.category = category;
         this.url = url;
+        this.downloaded = downloaded;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -65,11 +79,20 @@ public class Document implements Serializable, Parcelable{
         this.url = url;
     }
 
+    public boolean isDownloaded() {
+        return downloaded;
+    }
+
+    public void setDownloaded(boolean downloaded) {
+        this.downloaded = downloaded;
+    }
+
     // Decodes program json into program model object
     public static Document fromJson(JSONObject jsonObject) {
         Document document = new Document();
         // Deserialize json into object fields
         try {
+            document.id = jsonObject.getInt("id");
             document.title = jsonObject.getJSONObject("title").getString("rendered");
             document.format = jsonObject.getString("mime_type");
             document.category = jsonObject.getString("description");
@@ -105,7 +128,7 @@ public class Document implements Serializable, Parcelable{
     }
 
     public void writeToParcel(Parcel out, int flags) {
-        out.writeStringArray(new String[] {this.title, this.format, this.category, this.url});
+        out.writeArray(new Object[] {this.id, this.title, this.format, this.category, this.url, this.downloaded});
     }
 
     public static final Parcelable.Creator<Document> CREATOR
@@ -120,11 +143,12 @@ public class Document implements Serializable, Parcelable{
     };
 
     private Document(Parcel in) {
-        String[] data = new String[4];
-        in.readStringArray(data);
-        this.title = data[0];
-        this.format = data[1];
-        this.category = data[2];
-        this.url = data[3];
+        Object[] data = in.readArray(Document.class.getClassLoader());
+        this.id = Integer.parseInt(data[0].toString());
+        this.title = data[1].toString();
+        this.format = data[2].toString();
+        this.category = data[3].toString();
+        this.url = data[4].toString();
+        this.downloaded = Boolean.parseBoolean(data[5].toString());
     }
 }

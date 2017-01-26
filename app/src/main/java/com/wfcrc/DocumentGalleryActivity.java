@@ -71,7 +71,7 @@ public class DocumentGalleryActivity extends Fragment {
             //list of documents for this category
             ArrayList<Document> documentList = (ArrayList<Document>) documents.getValue();
             //the category (title) is going to be the first element in form of an imaginary document, so the adapter can draw it as the title
-            documentList.add(0, new Document(documents.getKey().toString(), null, null, null));
+            documentList.add(0, new Document(-1, documents.getKey().toString(), null, null, null, false));
             if (documentList != null) {
                 Context context = getContext();
                 RecyclerView newDocumentList = new RecyclerView(context);
