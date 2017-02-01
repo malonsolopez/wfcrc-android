@@ -1,12 +1,18 @@
 package com.wfcrc.adapters;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +20,7 @@ import com.wfcrc.R;
 import com.wfcrc.analytics.Analytics;
 import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Document;
+import com.wfcrc.utils.ConnectivityUtils;
 
 import java.util.List;
 
@@ -50,7 +57,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         ImageView documentIcon;
         TextView documentTitle;
-        ImageView documentSync;
+        ImageButton documentSync;
         View rowBottomSeparator;
 
 
@@ -58,7 +65,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             super(itemView);
             documentIcon = (ImageView) itemView.findViewById(R.id.documentIcon);
             documentTitle = (TextView) itemView.findViewById(R.id.documentTitle);
-            documentSync = (ImageView) itemView.findViewById(R.id.documentSync);
+            documentSync = (ImageButton) itemView.findViewById(R.id.documentSyncButton);
             rowBottomSeparator = (View) itemView.findViewById(R.id.rowBottomSeparator);
             itemView.setOnClickListener(this);
         }
@@ -105,7 +112,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 //TODO: set right icons
                 //((ItemHolder)holder).documentIcon.setImageResource(imageId);
                 ((ItemHolder) holder).documentTitle.setText(document.getTitle());
-                //((ItemHolder)holder).documentSync.setImageResource(imageId);
+                ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             } else {
                 ((TitleHolder) holder).documentCategory.setText(document.getTitle());
             }
@@ -113,7 +120,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             //TODO: set right icons
             //((ItemHolder)holder).documentIcon.setImageResource(imageId);
             ((ItemHolder) holder).documentTitle.setText(document.getTitle());
-            //((ItemHolder)holder).documentSync.setImageResource(imageId);
+            ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             if(position == getItemCount()-1)
                 ((ItemHolder) holder).rowBottomSeparator.setVisibility(View.GONE);
         }
@@ -142,11 +149,57 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.myClickListener = myClickListener;
     }
 
+    //onClick on the document
     private class MyClickListenerImplementation implements MyClickListener{
         @Override
         public void onItemClick(int position, View v) {
             Log.i(LOG_TAG, " Clicked on Item " + position);
-            //TODO: onClick on the document
+            Document doc = mDataset.get(position);
+            //open URL if we are online
+            if(ConnectivityUtils.isNetworkAvailable(mContext)){
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(doc.getUrl()));
+                mContext.startActivity(browserIntent);
+            }else{//open downloaded document if possible
+                if(doc.isDownloaded()){
+                    /*File file = new File(Environment.getExternalStorageDirectory(),
+                            "Report.pdf");
+                    Uri path = Uri.fromFile(file);
+                    Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
+                    pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    pdfOpenintent.setDataAndType(path, "application/pdf");
+                    try {
+                        startActivity(pdfOpenintent);
+                    }
+                    catch (ActivityNotFoundException e) {
+
+                    }*/
+                }
+            }
+        }
+    }
+
+    private class DownloadDocumentOnClickListener implements  View.OnClickListener {
+
+        private Document documentToDownload;
+
+        public DownloadDocumentOnClickListener(Document doc){
+            this.documentToDownload = doc;
+        }
+
+        @Override
+        public void onClick(View view) {
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(documentToDownload.getUrl()));
+            request.setDescription(documentToDownload.getTitle());
+            request.setTitle(documentToDownload.getTitle());
+            // in order for this if to run, you must use the android 3.2 to compile your app
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            }//TODO: controlar resto de casos
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, documentToDownload.getTitle());
+            // get download service and enqueue file
+            DownloadManager manager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+            manager.enqueue(request);
         }
     }
 }

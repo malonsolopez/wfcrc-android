@@ -30,14 +30,23 @@
             android:textSize="13sp"
             android:gravity="center_vertical"/>
 
-        <ImageView
+        <!--<ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:id="@+id/documentSync"
             android:src="@drawable/ic_sync_disabled_black_24dp"
-            android:tint="@color/primary_dark_material_light"/>
+            android:tint="@color/primary_dark_material_light"/>-->
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/documentSyncButton"
+            android:background="@drawable/ic_sync_disabled_black_24dp"
+            android:backgroundTint="@color/primary_dark_material_light"/>
 
 
 

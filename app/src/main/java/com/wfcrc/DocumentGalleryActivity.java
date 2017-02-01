@@ -1,9 +1,15 @@
 package com.wfcrc;
 
+import android.*;
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +38,9 @@ public class DocumentGalleryActivity extends Fragment {
 
     private HashMap<String, ArrayList<Document>> mSortedDocumentGallery = null;
 
+    private int mHasStoragePermission;
+    private static final int STORAGE_PERMISSION = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +64,36 @@ public class DocumentGalleryActivity extends Fragment {
         //GA
         ((AppConfig)getActivity().getApplication()).getAnalytics().sendPageView(getString(R.string.ga_document_gallery));
         return mDocumentGalleryFragmentView;
+    }
+
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            //permission to store documents
+            mHasStoragePermission = ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (mHasStoragePermission != PackageManager.PERMISSION_GRANTED) {
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                    // Show an expanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+
+                } else {
+
+                    // No explanation needed, we can request the permission.
+
+                    ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            }
+        }
     }
 
     private void showNoResultsScreen(LayoutInflater inflater, ViewGroup container) {
@@ -82,6 +121,22 @@ public class DocumentGalleryActivity extends Fragment {
             }
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permission was granted, yay!
+                mHasStoragePermission = PackageManager.PERMISSION_GRANTED;
+            } else {
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
+                mHasStoragePermission = PackageManager.PERMISSION_DENIED;
+            }
+        }
+    }
+
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
