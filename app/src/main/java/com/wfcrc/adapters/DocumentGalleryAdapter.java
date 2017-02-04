@@ -1,6 +1,7 @@
 package com.wfcrc.adapters;
 
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Document;
 import com.wfcrc.utils.ConnectivityUtils;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -160,20 +162,22 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(doc.getUrl()));
                 mContext.startActivity(browserIntent);
             }else{//open downloaded document if possible
-                if(doc.isDownloaded()){
-                    /*File file = new File(Environment.getExternalStorageDirectory(),
-                            "Report.pdf");
+                //if(doc.isDownloaded()){
+
+                    File file = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_DOWNLOADS),
+                            doc.getTitle() + ".pdf");
                     Uri path = Uri.fromFile(file);
                     Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
                     pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     pdfOpenintent.setDataAndType(path, "application/pdf");
                     try {
-                        startActivity(pdfOpenintent);
+                        mContext.startActivity(pdfOpenintent);
                     }
                     catch (ActivityNotFoundException e) {
-
-                    }*/
-                }
+                        //// TODO: 1/31/17
+                    }
+                //}
             }
         }
     }
