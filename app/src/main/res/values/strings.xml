@@ -16,6 +16,7 @@
     <string name="webURL"><a href="http://wfcrc.org">http://wfcrc.org</a></string>
     <string name="currency">$</string>
     <string name="no_results">No results</string>
+    <string name="no_network">You don\'t have connectivity</string>
 
     <!-- RIGHT MENU -->
 

@@ -2,8 +2,10 @@ package com.wfcrc.adapters;
 
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -16,11 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wfcrc.R;
 import com.wfcrc.analytics.Analytics;
 import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Document;
+import com.wfcrc.sqlite.WFCRCDB;
 import com.wfcrc.utils.ConnectivityUtils;
 
 import java.io.File;
@@ -162,7 +166,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(doc.getUrl()));
                 mContext.startActivity(browserIntent);
             }else{//open downloaded document if possible
-                //if(doc.isDownloaded()){
+                if(doc.isDownloaded()){
 
                     File file = new File(Environment.getExternalStoragePublicDirectory(
                             Environment.DIRECTORY_DOWNLOADS),
@@ -170,14 +174,14 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     Uri path = Uri.fromFile(file);
                     Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
                     pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    pdfOpenintent.setDataAndType(path, "application/pdf");
+                    pdfOpenintent.setDataAndType(path, "*/*");
                     try {
                         mContext.startActivity(pdfOpenintent);
                     }
                     catch (ActivityNotFoundException e) {
                         //// TODO: 1/31/17
                     }
-                //}
+                }
             }
         }
     }
@@ -191,19 +195,34 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         @Override
-        public void onClick(View view) {
-            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(documentToDownload.getUrl()));
-            request.setDescription(documentToDownload.getTitle());
-            request.setTitle(documentToDownload.getTitle());
-            // in order for this if to run, you must use the android 3.2 to compile your app
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            }//TODO: controlar resto de casos
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, documentToDownload.getTitle());
-            // get download service and enqueue file
-            DownloadManager manager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
-            manager.enqueue(request);
+        public void onClick(final View view) {
+            if (ConnectivityUtils.isNetworkAvailable(mContext)) {
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(documentToDownload.getUrl()));
+                request.setDescription(documentToDownload.getTitle());
+                request.setTitle(documentToDownload.getTitle());
+                // in order for this if to run, you must use the android 3.2 to compile your app
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    request.allowScanningByMediaScanner();
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                }//TODO: controlar resto de casos
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, documentToDownload.getTitle());
+                // get download service and enqueue file
+                DownloadManager manager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+                manager.enqueue(request);
+                BroadcastReceiver onComplete=new BroadcastReceiver() {
+                    public void onReceive(Context ctxt, Intent intent) {
+                        documentToDownload.setDownloaded(true);
+                        //change isDownload flag on document gallery database
+                        WFCRCDB db = new WFCRCDB(mContext);
+                        db.updateDocument(documentToDownload);
+                        //disable download button
+                        view.setEnabled(false);
+                    }
+                };
+                mContext.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            }else{
+                Toast.makeText(mContext, mContext.getString(R.string.no_network), Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

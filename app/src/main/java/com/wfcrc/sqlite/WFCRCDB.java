@@ -102,6 +102,7 @@ public class WFCRCDB {
         values.put(WFCRCContract.Documents.COLUMN_NAME_FORMAT, document.getFormat());
         values.put(WFCRCContract.Documents.COLUMN_NAME_CATEGORY, document.getCategory());
         values.put(WFCRCContract.Documents.COLUMN_NAME_URL, document.getUrl());
+        values.put(WFCRCContract.Documents.COLUMN_NAME_DOWNLOADED, document.isDownloaded());
         String where = WFCRCContract.Documents.COLUMN_NAME_ID + " LIKE ?";
         String[] whereArgs = {Integer.toString(document.getId())};
         return db.update(
