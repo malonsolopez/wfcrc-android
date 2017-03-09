@@ -45,7 +45,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:id="@+id/documentSyncButton"
-            android:background="@drawable/ic_sync_disabled_black_24dp"
+            android:background="@drawable/icon_sync"
             android:backgroundTint="@color/primary_dark_material_light"/>
 
 
