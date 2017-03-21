@@ -84,7 +84,7 @@
             </android.support.design.widget.TextInputLayout>
 
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:orientation="horizontal">
@@ -101,12 +101,13 @@
                         android:tint="@color/primary_dark_material_light"
                         android:layout_gravity="center_vertical|center_horizontal"/>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:dividerPadding="8dp">
+                    android:dividerPadding="8dp"
+                    android:layout_marginLeft="48dp">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
@@ -119,7 +120,24 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:dividerPadding="8dp"
+                android:layout_marginLeft="48dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextAge"
+                    android:hint="@string/age"
+                    android:textSize="16sp"
+                    android:inputType="number"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
 
             <!--<LinearLayout
                 android:layout_width="match_parent"
@@ -264,13 +282,64 @@
 
             </RadioGroup>
 
-            <CheckBox
+            <!--<CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/diver"
                 android:id="@+id/diverCheckBox"
                 android:textSize="16sp"
-                android:textColor="@color/primary_dark_material_light"/>
+                android:textColor="@color/primary_dark_material_light"/>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="0">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/dive"
+                        android:tint="@color/primary_dark_material_light"
+                        android:layout_gravity="center_vertical|center_horizontal"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="@string/diver"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/spinnerDiveExperience"
+                android:layout_marginLeft="48dp"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:dividerPadding="8dp"
+                android:layout_marginLeft="48dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextHoursDiving"
+                    android:hint="@string/hours_diving"
+                    android:textSize="16sp"
+                    android:inputType="number"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

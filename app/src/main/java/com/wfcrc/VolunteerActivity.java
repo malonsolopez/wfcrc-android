@@ -34,12 +34,19 @@ public class VolunteerActivity extends AppCompatActivity {
         setTitle(R.string.volunteer_title);
         setContentView(R.layout.activity_volunteer);
         //skills spinner
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerVolunteerSkill);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        Spinner skillsSpinner = (Spinner) findViewById(R.id.spinnerVolunteerSkill);
+        ArrayAdapter<CharSequence> skillsAdapter = ArrayAdapter.createFromResource(this,
                 R.array.skills_array, /*android.R.layout.simple_spinner_item*/R.layout.wfcrc_spinner_dropdown_view);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.wfcrc_spinner_dropdown_view);
-        spinner.setAdapter(adapter);
+        skillsAdapter.setDropDownViewResource(R.layout.wfcrc_spinner_dropdown_view);
+        skillsSpinner.setAdapter(skillsAdapter);
+        //dive experience spinner
+        Spinner diveExperienceSpinner = (Spinner) findViewById(R.id.spinnerDiveExperience);
+        ArrayAdapter<CharSequence> diveExperienceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.dive_experience_array, /*android.R.layout.simple_spinner_item*/R.layout.wfcrc_spinner_dropdown_view);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        diveExperienceAdapter.setDropDownViewResource(R.layout.wfcrc_spinner_dropdown_view);
+        diveExperienceSpinner.setAdapter(diveExperienceAdapter);
         //attach cv button
         ((Button)findViewById(R.id.attachCVButton)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,12 +134,15 @@ public class VolunteerActivity extends AppCompatActivity {
         volunteerForm.name = ((EditText)findViewById(R.id.editTextName)).getText().toString();
         volunteerForm.lastName = ((EditText)findViewById(R.id.editTextLastName)).getText().toString();
         volunteerForm.phone = ((EditText)findViewById(R.id.editTextPhone)).getText().toString();
+        volunteerForm.age = ((EditText)findViewById(R.id.editTextAge)).getText().toString();
         if (((RadioButton)findViewById(R.id.radioButtonVolunteer)).isChecked())
             volunteerForm.volunteerType = getString(R.string.volunteer);
         else
             volunteerForm.volunteerType = getString(R.string.ambassador);
         volunteerForm.skill = ((Spinner)findViewById(R.id.spinnerVolunteerSkill)).getSelectedItem().toString();
-        volunteerForm.diver = ((CheckBox)findViewById(R.id.diverCheckBox)).isChecked();
+        //volunteerForm.diver = ((CheckBox)findViewById(R.id.diverCheckBox)).isChecked();
+        volunteerForm.divingExperience = ((Spinner)findViewById(R.id.spinnerDiveExperience)).getSelectedItem().toString();
+        volunteerForm.hoursDiving = ((EditText)findViewById(R.id.editTextHoursDiving)).getText().toString();
         volunteerForm.motivation = ((TextInputEditText)findViewById(R.id.editTextComments)).getText().toString();
         //verify that the it' filled
         if(volunteerForm.name.isEmpty()){
@@ -145,6 +155,10 @@ public class VolunteerActivity extends AppCompatActivity {
         }
         if(volunteerForm.phone.isEmpty()){
             ((EditText)findViewById(R.id.editTextPhone)).setError(getString(R.string.not_filled));
+            isComplete =  false;
+        }
+        if(volunteerForm.age.isEmpty()){
+            ((EditText)findViewById(R.id.editTextAge)).setError(getString(R.string.not_filled));
             isComplete =  false;
         }
         if(volunteerForm.cv == null){
@@ -167,9 +181,12 @@ public class VolunteerActivity extends AppCompatActivity {
         private String lastName;
         private String phone;
         //private String email;
+        private String age;
         private String volunteerType;
         private String skill;
-        private boolean diver;
+        //private boolean diver;
+        private String divingExperience;
+        private String hoursDiving;
         private String cv = null;
         private String motivation;
 
@@ -191,6 +208,11 @@ public class VolunteerActivity extends AppCompatActivity {
             volunteer.append(COLON);
             volunteer.append(phone);
             volunteer.append(NEW_LINE);
+            //age
+            volunteer.append(getString(R.string.age));
+            volunteer.append(COLON);
+            volunteer.append(age);
+            volunteer.append(NEW_LINE);
             //volunteer type
             volunteer.append(getString(R.string.volunteer_type));
             volunteer.append(COLON);
@@ -204,7 +226,12 @@ public class VolunteerActivity extends AppCompatActivity {
             //diver
             volunteer.append(getString(R.string.diver));
             volunteer.append(COLON);
-            volunteer.append(diver);
+            volunteer.append(divingExperience);
+            volunteer.append(NEW_LINE);
+            //hours diving
+            volunteer.append(getString(R.string.hours_diving));
+            volunteer.append(COLON);
+            volunteer.append(hoursDiving);
             volunteer.append(NEW_LINE);
             //comments
             volunteer.append(getString(R.string.motivation));

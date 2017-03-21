@@ -69,6 +69,7 @@
     <string name="last_name">Last name</string>
     <string name="email">Email</string>
     <string name="phone">Phone</string>
+    <string name="age">Age</string>
     <string name="type_coral">Type of coral</string>
     <string name="type_coral_prompt">Choose one or more options</string>
     <string name="attach">Attach photos</string>
@@ -105,7 +106,15 @@
         <item>Legal</item>
         <item>Other</item>
     </string-array>
-    <string name="diver">Are you a diver?</string>
+    <string name="diver">Dive level experience</string>
+    <string name="hours_diving">How many down hours?</string>
+    <string-array name="dive_experience_array">
+        <item>None</item>
+        <item>Beginner</item>
+        <item>Accomplished</item>
+        <item>Advanced</item>
+        <item>Dive master</item>
+    </string-array>
     <string name="volunteer_type">How do you want to colaborate?</string>
     <string name="volunteer">Volunteer</string>
     <string name="ambassador">Ambassador</string>
