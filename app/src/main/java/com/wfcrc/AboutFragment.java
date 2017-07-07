@@ -133,6 +133,22 @@ public class AboutFragment extends Fragment {
                 mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_LI));
             }
         });
+        ((ImageButton)bottomSheet.findViewById(R.id.followGPButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_googleplus));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_GP));
+            }
+        });
+        ((ImageButton)bottomSheet.findViewById(R.id.followYTButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FollowUsImp(AboutFragment.this.getActivity()).follow(getString(R.string.follow_youtube));
+                //GA
+                mTracker.sendEvent(getString(R.string.ga_about_follow), getString(R.string.ga_about_YT));
+            }
+        });
         //hide bottom sheet when click on the screen
         aboutView.findViewById(R.id.aboutMainLayout).setOnClickListener(new View.OnClickListener() {
             @Override

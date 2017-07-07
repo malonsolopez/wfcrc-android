@@ -66,9 +66,11 @@
         We want participation for all interested parties to be personal and long lasting. For sustainability we need to involve not only today’s divers but tomorrows as well. It is important to educate future ocean enthusiast the need to preserve the oceans resources as they are limited and currently in immediate peril.  We want to create an environment of revolving benefits for revolving participation from divers to local economies, and to the real benefit, the world’s reef complexes.
     </string>
     <string name="follow">Follow us</string>
-    <string name="follow_twitter">https://twitter.com/intent/follow?screen_name=WFCRConserve</string>
-    <string name="follow_facebook">https://www.facebook.com/TheWorldFederationForCoralReefConservation/</string>
+    <string name="follow_twitter">https://twitter.com/CoralConserve</string>
+    <string name="follow_facebook">https://www.facebook.com/TheWorldFederationForCoralReefConservation</string>
     <string name="follow_linkein">http://www.linkedin.com/company/world-federation-for-coral-reef-conservation</string>
+    <string name="follow_googleplus">https://plus.google.com/u/1/b/100744766848434756804/100744766848434756804</string>
+    <string name="follow_youtube">https://www.youtube.com/channel/UCspRoolLWHzkl4oO03yL7hA</string>
     <string name="title_activity_splash">SplashActivity</string>
 
     <!-- DONATE -->
@@ -163,6 +165,8 @@
     <string name="ga_about_FB">Facebook</string>
     <string name="ga_about_TW">Twitter</string>
     <string name="ga_about_LI">LinkedIn</string>
+    <string name="ga_about_GP">Google Plus</string>
+    <string name="ga_about_YT">YouTube</string>
     <string name="ga_about_share">Share About Us</string>
     <string name="ga_category_share">Share</string>
     <string name="title_activity_document_gallery_search">DocumentGallerySearchActivity</string>
