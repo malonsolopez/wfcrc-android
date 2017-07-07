@@ -105,8 +105,12 @@ public class AboutFragment extends Fragment {
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                View fab = getActivity().findViewById(R.id.donate);
-                fab.animate().scaleX(1 - slideOffset).scaleY(1 - slideOffset).setDuration(0).start();
+                try {
+                    View fab = getActivity().findViewById(R.id.donate);
+                    fab.animate().scaleX(1 - slideOffset).scaleY(1 - slideOffset).setDuration(0).start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
          ((ImageButton)bottomSheet.findViewById(R.id.followTWButton)).setOnClickListener(new View.OnClickListener() {
@@ -175,7 +179,6 @@ public class AboutFragment extends Fragment {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.share) {
             //TODO: content for sharing
@@ -213,6 +216,7 @@ public class AboutFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     /**
