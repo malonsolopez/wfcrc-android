@@ -54,9 +54,11 @@ public class ProgramDetailActivity extends AppCompatActivity {
 
     private void initProgramDetailView(){
         int imageId = getResources().getIdentifier(mProgram.getImageId(), "drawable", getPackageName());
-        if(imageId == 0)
+        /*if(imageId == 0)
             findViewById(R.id.programImage).setVisibility(ImageView.GONE);
         else
+            ((ImageView)findViewById(R.id.programImage)).setImageResource(imageId);*/
+        if(imageId != 0)
             ((ImageView)findViewById(R.id.programImage)).setImageResource(imageId);
         ((TextView)findViewById(R.id.programTitle)).setText(mProgram.getTitle());
         ((TextView)findViewById(R.id.programDescription)).setText(mProgram.getDescription());
