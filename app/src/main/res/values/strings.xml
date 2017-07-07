@@ -40,7 +40,31 @@
     <string name="first_response_tab_title">First Response</string>
 
     <!-- ABOUT US -->
-    <string name="aboutDescription">The World Federation for Coral Reef Conservation is a nonprofit organization dedicated to stopping the destruction of coral reefs by involving local citizens, scientists and recreational divers in utilizing spatial data more effectively as it pertains to reef decline. This service-oriented spatial data infrastructure brings together current data and observations, data management, GIS/GPS current technology, and leading edge internet communication to provide the "real time" data necessary to make informed decisions regarding coral reef decline.</string>
+    <string name="aboutDescription">
+        The World Federation for Coral Reef Conservation (WFCRC) was developed in 2008 as a volunteer, community-based monitoring protocol designed to measure the health and safety of coral reefs on a global scale. WFCRC is developing the following goals:
+        \n\n
+        As we proceed to identify and standardize threats to coral reefs and share that information, we have seen how the items listed below are of great importance to reefs worldwide.
+        \n\n
+        - to foster an environment of collaboration among agencies around the world for standardization and the sharing of data gathered and for concerns that effect reefs worldwide, Citizen Scientists, local governments and local stakeholders.
+        \n
+        -to create awareness by education through an outreach program to reach current consumers of ocean resources and future consumers;
+        \n
+        - to create a global GIS dashboard and database with data from a network of volunteer citizen scientists that regularly monitor and report on reef health;
+        \n
+        - to involve local community action to create requirements for re-zoning parcels that could affect downhill geology and/or agricultural runoff that may negatively affect or even kill reefs in proximity by using ecologically sound and economically sustainable solutions.
+        \n\n
+        With this effort of designing a Service-Oriented Spatial Data Infrastructures, we highlight a strategy for utilizing spatial data more effectively, as it pertains to reef decline.
+        \n\n
+        We have developed a step procedure or workflow for identifying how sharing data between all groups is essential for making informed decisions about the health and well being of the world’s coral reefs. Not only sharing but the ability to find pertinent information in a single source and in a rational and easy avenue for non-professionals is essential for continued use.  To reach even a larger population we will also create and offer links, syndications and feeds to libraries throughout the world.
+        \n\n
+        We are a completely paperless effort.  Our business environmental effort is to have the smallest footprint and make the largest impact. All of our contact with team members will be via email. So our effort will be to create strategic  alliances’ with agencies like NOAA, World Resources Inc, Seas, Reef Relief, DAN, dive shops, universities research groups and anyone involved is providing diving excursions or aquatic research. With collaboration between these groups effective monitoring sites can be identified for study, data gathering and mitigating coral reef decline.
+        \n\n
+        Local island governments are a very large part of this effort. It’s takes an attitude of thinking globally and acting locally. For local business, “going green” is an important aspect of continued success. Projecting future development and meeting infrastructure demands are always difficult. As local governments regularly up date future land-use plans, typically there are no requirements to rezone parcels that could affect downhill geology and/or agricultural runoff  that may negatively affect or even kill reefs in proximity. Demands of the country’s infrastructure are increasing without data driven environmental restraints (See Sediment Flow &amp; Urban Runoff). As development occurs without understanding the ramification of this development of roads, sewer and water runoff, decline of marine resources will continue, as well as clean water availability. For local knowledge and connections to the island governments an ambassador will be identified and secured for this effort. As a result of this investigation a template or work flow will be realized and can be applied to other island governments in addition to exposing governments to GIS and how they could benefit from making development decisions driven by current data. The location for the roll out of the first WFCRC dive site will be The Island of St. Martin, followed by Saba, Anguilla and Guadeloupe. Then other islands will be evaluated for The Green Card development using the development template developed on the Island of St. Martin. We have developed many contacts with local business as well as local officials in St. Martin who are excited about the project as they realize the socioeconomic impact the reef management has on the future development of their island.
+        \n\n
+        Once again the end result we hope to achieve is to participate in and have an impact on, the mitigation of the decline of the world’s ocean coral reefs through legislation driven by scientific data collected by a worldwide network of diver participation. With results that can be realized in one’s life time.
+        \n\n
+        We want participation for all interested parties to be personal and long lasting. For sustainability we need to involve not only today’s divers but tomorrows as well. It is important to educate future ocean enthusiast the need to preserve the oceans resources as they are limited and currently in immediate peril.  We want to create an environment of revolving benefits for revolving participation from divers to local economies, and to the real benefit, the world’s reef complexes.
+    </string>
     <string name="follow">Follow us</string>
     <string name="follow_twitter">https://twitter.com/intent/follow?screen_name=WFCRConserve</string>
     <string name="follow_facebook">https://www.facebook.com/TheWorldFederationForCoralReefConservation/</string>
