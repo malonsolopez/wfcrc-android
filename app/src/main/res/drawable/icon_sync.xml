@@ -4,5 +4,4 @@
         android:drawable="@drawable/ic_sync_black_24dp" />
     <item android:state_enabled="true"
         android:drawable="@drawable/ic_sync_disabled_black_24dp" />
-
 </selector>

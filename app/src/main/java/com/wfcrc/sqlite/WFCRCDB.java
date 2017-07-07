@@ -34,7 +34,10 @@ public class WFCRCDB {
         values.put(WFCRCContract.Documents.COLUMN_NAME_URL, document.getUrl());
         values.put(WFCRCContract.Documents.COLUMN_NAME_DOWNLOADED, document.isDownloaded());
         // Insert the new row, returning the primary key value of the new row
-        return db.insert(WFCRCContract.Documents.TABLE_NAME, null, values);
+        return db.insertWithOnConflict(WFCRCContract.Documents.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        //con lo nuevo que me descargo creo una tabla temporal
+        // full outer join con la tabla antigua
+        //con el resultado me creo 3 tablas, una para los que son a insertar, otra los que son a borrar y otra los que son a update
     }
 
     public void insertDocuments(List<Document> documentList){

@@ -117,6 +117,13 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             if (position != 0) {
                 //TODO: set right icons
                 //((ItemHolder)holder).documentIcon.setImageResource(imageId);
+                if(document.isDownloaded()) {
+                    //((ItemHolder) holder).documentSync.setImageResource(R.drawable.ic_sync_black_24dp);
+                    ((ItemHolder) holder).documentSync.setEnabled(false);
+                }else{
+                    //((ItemHolder) holder).documentSync.setImageResource(R.drawable.ic_sync_disabled_black_24dp);
+                    ((ItemHolder) holder).documentSync.setEnabled(true);
+                }
                 ((ItemHolder) holder).documentTitle.setText(document.getTitle());
                 ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             } else {
@@ -125,6 +132,14 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }else{
             //TODO: set right icons
             //((ItemHolder)holder).documentIcon.setImageResource(imageId);
+            if(document.isDownloaded()) {
+                //((ItemHolder) holder).documentSync.setImageResource(R.drawable.ic_sync_black_24dp);
+                ((ItemHolder) holder).documentSync.setEnabled(false);
+            }else{
+                //((ItemHolder) holder).documentSync.setImageResource(R.drawable.ic_sync_disabled_black_24dp);
+                ((ItemHolder) holder).documentSync.setEnabled(true);
+            }
+            //backgroundTint="@color/primary_dark_material_light"
             ((ItemHolder) holder).documentTitle.setText(document.getTitle());
             ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             if(position == getItemCount()-1)
