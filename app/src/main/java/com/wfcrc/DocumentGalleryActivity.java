@@ -1,20 +1,15 @@
 package com.wfcrc;
 
-import android.*;
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -105,7 +100,7 @@ public class DocumentGalleryActivity extends Fragment {
         LinearLayout documentGalleryLayout = (LinearLayout) mDocumentGalleryFragmentView.findViewById(R.id.documentGalleryLayout);
         //create list per each category
         Iterator iterator = mSortedDocumentGallery.entrySet().iterator();
-        while (iterator.hasNext()) {
+        /*while (iterator.hasNext()) {
             Map.Entry documents = (Map.Entry) iterator.next();
             //list of documents for this category
             ArrayList<Document> documentList = (ArrayList<Document>) documents.getValue();
@@ -119,6 +114,26 @@ public class DocumentGalleryActivity extends Fragment {
                 newDocumentList.setAdapter(new DocumentGalleryAdapter(context, documentList, true));
                 documentGalleryLayout.addView(newDocumentList);
             }
+        }*/
+        ArrayList<Document> documentList = new ArrayList<Document>();
+        while (iterator.hasNext()) {
+            Map.Entry documents = (Map.Entry) iterator.next();
+            //list of documents for this category
+            ArrayList<Document> categoryList = (ArrayList<Document>) documents.getValue();
+            //the category (title) is going to be the first element in form of an imaginary document, so the adapter can draw it as the title
+            categoryList.add(0, new Document(-1, documents.getKey().toString(), null, null, null, false));
+            documentList.addAll(categoryList);
+
+        }
+        if (!documentList.isEmpty()) {
+            Context context = getContext();
+            RecyclerView newDocumentList = new RecyclerView(context);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+            newDocumentList.setLayoutManager(mLayoutManager);
+            newDocumentList.setAdapter(new DocumentGalleryAdapter(context, documentList, true));
+            documentGalleryLayout.addView(newDocumentList);
+        }else{
+
         }
     }
 

@@ -3,6 +3,7 @@ package com.wfcrc.adapters;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -36,6 +37,8 @@ import java.util.List;
 public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private static String LOG_TAG = "DocumentGalleryAdapter";
+    private static final int TITLE_VIEW_TYPE = 0;
+    private static final int ITEM_VIEW_TYPE =1;
 
     private List<Document> mDataset;
 
@@ -94,14 +97,16 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public int getItemViewType(int position) {
         if(position == 0 && mNeedsTitle)
-            return 0;//first item is the title
+            return TITLE_VIEW_TYPE;//first item is the title
+        else if(mDataset.get(position).getCategory() == null)
+            return TITLE_VIEW_TYPE;//titles below in the list
         else
-            return 1;//the rest of the items are documents
+            return ITEM_VIEW_TYPE;//the rest of the items are documents
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == 0) {//title
+        if(viewType == TITLE_VIEW_TYPE) {//title
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.document_gallery_category_title, parent, false);
             return  new TitleHolder(view);
         }else {//item
@@ -114,7 +119,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Document document = mDataset.get(position);
         if (mNeedsTitle) {
-            if (position != 0) {
+            /*if (position != 0) {
                 //TODO: set right icons
                 //((ItemHolder)holder).documentIcon.setImageResource(imageId);
                 if(document.isDownloaded()) {
@@ -128,6 +133,21 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             } else {
                 ((TitleHolder) holder).documentCategory.setText(document.getTitle());
+            }*/
+            if(holder instanceof TitleHolder){
+                ((TitleHolder) holder).documentCategory.setText(document.getTitle());
+            }else if(holder instanceof ItemHolder){
+                //TODO: set right icons
+                //((ItemHolder)holder).documentIcon.setImageResource(imageId);
+                if(document.isDownloaded()) {
+                    //((ItemHolder) holder).documentSync.setImageResource(R.drawable.ic_sync_black_24dp);
+                    ((ItemHolder) holder).documentSync.setEnabled(false);
+                }else{
+                    //((ItemHolder) holder).documentSync.setImageResource(R.drawable.ic_sync_disabled_black_24dp);
+                    ((ItemHolder) holder).documentSync.setEnabled(true);
+                }
+                ((ItemHolder) holder).documentTitle.setText(document.getTitle());
+                ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             }
         }else{
             //TODO: set right icons
