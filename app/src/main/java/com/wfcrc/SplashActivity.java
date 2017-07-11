@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.wfcrc.config.AppConfig;
+import com.wfcrc.repository.FTPDocumentRepository;
 import com.wfcrc.repository.RepositoryException;
 import com.wfcrc.repository.WordPressDocumentRepository;
 import com.wfcrc.utils.VolleyCallback;
@@ -26,7 +27,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //retrieve document gallery
         try {
-            (new WordPressDocumentRepository(this, new SplashVolleyCallback(this))).getAll();
+            //(new WordPressDocumentRepository(this, new SplashVolleyCallback(this))).getAll();
+            (new FTPDocumentRepository(this, new SplashCallback())).getAll();
+            //AppConfig.getDocumentRepository(this).getAll();
         } catch (RepositoryException e) {
             //TODO: use offline data from previous usages of the app
             continueLaunching();
@@ -40,6 +43,17 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public class SplashCallback {
+
+        public void proceedWithLaunching(){
+            continueLaunching();
+        }
+
+        public void cancelLaunching(){
+            //TODO
+        }
     }
 
     private class SplashVolleyCallback extends VolleyCallback{

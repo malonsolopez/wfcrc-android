@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class JSONDocumentRepository {
 
+    //TODO: esto deberia implementar correctamente Repository
     public static List<Document> getAll(String jsonString) throws RepositoryException {
         ArrayList<Document> documents = new ArrayList<Document>();
         try {
