@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.wfcrc.analytics.Analytics;
 import com.wfcrc.config.AppConfig;
 import com.wfcrc.pojos.Document;
 import com.wfcrc.repository.RepositoryException;
@@ -30,12 +31,16 @@ public class MainActivity extends AppCompatActivity
         AboutFragment.OnFragmentInteractionListener,
         FirstResponseFragment.OnFragmentInteractionListener{
 
+    private Analytics mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //GA
+        mTracker = ((AppConfig)getApplication()).getAnalytics();
         //show first fragment (tabs) when launching
         Fragment fragment = null;
         Class fragmentClass = null;
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity
                 //startActivity(donateIntent);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.donation_website_url)));
                 startActivity(browserIntent);
+                mTracker.sendEvent(getString(R.string.ga_programs_detail), getString(R.string.ga_action_donate));
             }
         });
 

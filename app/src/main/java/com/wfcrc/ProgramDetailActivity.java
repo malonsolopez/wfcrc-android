@@ -50,6 +50,7 @@ public class ProgramDetailActivity extends AppCompatActivity {
                 //startActivity(donateIntent);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.donation_website_url)));
                 startActivity(browserIntent);
+                mTracker.sendEvent(getString(R.string.ga_programs_detail), getString(R.string.ga_action_donate));
             }
         });
     }
