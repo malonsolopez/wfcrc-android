@@ -3,6 +3,7 @@ package com.wfcrc;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -45,9 +46,10 @@ public class ProgramDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent donateIntent = new Intent(ProgramDetailActivity.this, DonateActivity.class);
-                startActivity(donateIntent);
-
+                //Intent donateIntent = new Intent(ProgramDetailActivity.this, DonateActivity.class);
+                //startActivity(donateIntent);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.donation_website_url)));
+                startActivity(browserIntent);
             }
         });
     }
