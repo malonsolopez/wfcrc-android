@@ -57,7 +57,7 @@ public class FTPDocumentRepository implements Repository{
                         Document document = new Document();
                         document.setId(new Random().nextInt());
                         document.setTitle(title);
-                        document.setUrl("ftp.wfcrc.org/public_html/docs/" + title);
+                        document.setUrl("http://wfcrc.org/docs/" + title);
                         document.setFormat(title.substring(title.length()-3));
                         //TODO: improve hardcoded categories
                         String categoryID = title.substring(0, 3);

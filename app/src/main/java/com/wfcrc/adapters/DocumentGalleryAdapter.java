@@ -147,7 +147,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     ((ItemHolder) holder).documentSync.setEnabled(true);
                 }
                 ((ItemHolder) holder).documentTitle.setText(document.getTitle());
-                ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
+                //((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             }
         }else{
             //TODO: set right icons
@@ -161,7 +161,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
             //backgroundTint="@color/primary_dark_material_light"
             ((ItemHolder) holder).documentTitle.setText(document.getTitle());
-            ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
+            //((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             if(position == getItemCount()-1)
                 ((ItemHolder) holder).rowBottomSeparator.setVisibility(View.GONE);
         }
