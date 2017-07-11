@@ -80,7 +80,7 @@ public class FTPDocumentRepository implements Repository{
                                 break;
                             case "OWC": document.setCategory("Oceans & Winds Currents");
                                 break;
-                            case "GF-": document.setCategory("Grants &Funding");
+                            case "GF-": document.setCategory("Grants & Funding");
                                 break;
                             case "VP-": document.setCategory("Vendor Products");
                                 break;
