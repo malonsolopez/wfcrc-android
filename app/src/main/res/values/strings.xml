@@ -88,7 +88,7 @@
     <string name="donate_share_subject">Donate to WFCRC</string>
     <string name="donate_share_body">My donation to WFCRC helps save the coral reef.</string>
     <string name="donation_invoice">Donation to WFCRC</string>
-    <string name="donation_website_url">http://wfcrc3-amazon.wfcrc.org/donation-form/</string>
+    <string name="donation_website_url">http://www.wfcrc.org/donation-form/</string>
 
     <!-- FEEDBACK FORM -->
     <string name="feedback_title">Send feedback</string>
