@@ -147,7 +147,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     ((ItemHolder) holder).documentSync.setEnabled(true);
                 }
                 ((ItemHolder) holder).documentTitle.setText(document.getTitle());
-                //((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
+                ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             }
         }else{
             //TODO: set right icons
@@ -161,7 +161,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
             //backgroundTint="@color/primary_dark_material_light"
             ((ItemHolder) holder).documentTitle.setText(document.getTitle());
-            //((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
+            ((ItemHolder)holder).documentSync.setOnClickListener(new DownloadDocumentOnClickListener(document));
             if(position == getItemCount()-1)
                 ((ItemHolder) holder).rowBottomSeparator.setVisibility(View.GONE);
         }
@@ -205,7 +205,7 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                     File file = new File(Environment.getExternalStoragePublicDirectory(
                             Environment.DIRECTORY_DOWNLOADS),
-                            doc.getTitle() + ".pdf");
+                            doc.getTitle()/* + ".pdf"*/);
                     Uri path = Uri.fromFile(file);
                     Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
                     pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

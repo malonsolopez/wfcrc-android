@@ -102,11 +102,13 @@ public class FTPDocumentRepository implements Repository{
         }
 
         protected void onPostExecute(SplashActivity.SplashCallback callback) {
-            if(!mDocumentGallery.isEmpty()){
-                //store documents in database
-                WFCRCDB db = new WFCRCDB(mContext);
-                db.deleteDocuments();
-                db.insertDocuments(mDocumentGallery);
+            if (mDocumentGallery != null) {
+                if(!mDocumentGallery.isEmpty()){
+                    //store documents in database
+                    WFCRCDB db = new WFCRCDB(mContext);
+                    db.deleteDocuments();
+                    db.insertDocuments(mDocumentGallery);
+                }
             }
             callback.proceedWithLaunching();
         }
