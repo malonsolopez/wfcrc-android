@@ -202,9 +202,9 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 mContext.startActivity(browserIntent);
             }else{//open downloaded document if possible
                 if(doc.isDownloaded()){
-
-                    File file = new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_DOWNLOADS),
+                    File file = new File(/*Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_DOWNLOADS),*/
+                            mContext.getExternalFilesDir(null),
                             doc.getTitle()/* + ".pdf"*/);
                     Uri path = Uri.fromFile(file);
                     Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
@@ -240,7 +240,13 @@ public class DocumentGalleryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     request.allowScanningByMediaScanner();
                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                 }//TODO: controlar resto de casos
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, documentToDownload.getTitle());
+                //request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, documentToDownload.getTitle());
+                File file = new File(
+                        mContext.getExternalFilesDir(null),
+                        documentToDownload.getTitle());
+                request.setDestinationUri(Uri.fromFile(file));
+                request.setTitle(documentToDownload.getTitle());
+                request.setMimeType("application");
                 // get download service and enqueue file
                 DownloadManager manager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
                 manager.enqueue(request);
