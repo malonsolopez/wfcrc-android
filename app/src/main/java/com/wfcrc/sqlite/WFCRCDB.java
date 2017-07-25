@@ -4,10 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 
 import com.wfcrc.pojos.Document;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,14 +37,22 @@ public class WFCRCDB {
         values.put(WFCRCContract.Documents.COLUMN_NAME_URL, document.getUrl());
         values.put(WFCRCContract.Documents.COLUMN_NAME_DOWNLOADED, document.isDownloaded());
         // Insert the new row, returning the primary key value of the new row
+        //replaces on clonflict to make sure we don't overwrite the field downloaded
         return db.insertWithOnConflict(WFCRCContract.Documents.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-        //con lo nuevo que me descargo creo una tabla temporal
-        // full outer join con la tabla antigua
-        //con el resultado me creo 3 tablas, una para los que son a insertar, otra los que son a borrar y otra los que son a update
     }
 
     public void insertDocuments(List<Document> documentList){
+        File documentGalleryDirectory = mContext.getExternalFilesDir(null);
+        List<String> downloadedDocuments = null;
+        try{
+            downloadedDocuments = Arrays.asList(documentGalleryDirectory.list());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         for (Document document: documentList) {
+            //verify if the document is downloaded before inserting
+            if(downloadedDocuments != null)
+                document.setDownloaded(downloadedDocuments.contains(document.getTitle()));
             insertDocument(document);
         }
     }
