@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.wfcrc.FeedbackActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         >
 
@@ -52,15 +52,12 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:dividerPadding="8dp"
-                    android:layout_weight="1">
+                    android:layout_height="48dp"
+                    android:dividerPadding="8dp">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/editTextName"
                         android:hint="@string/name"
                         android:textSize="16sp"
@@ -72,21 +69,30 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:dividerPadding="8dp"
                     android:layout_marginLeft="48dp">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/editTextLastName"
                         android:hint="@string/last_name"
                         android:textSize="16sp"/>
 
                 </android.support.design.widget.TextInputLayout>
 
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,14 +115,12 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:dividerPadding="8dp">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/editTextPhone"
                         android:hint="@string/phone"
                         android:textSize="16sp"
@@ -125,6 +129,17 @@
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,26 +162,25 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:dividerPadding="8dp">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/editTextEmail"
                         android:hint="@string/email"
                         android:textSize="16sp"
-                        android:inputType="phone" />
+                        android:inputType="textEmailAddress" />
 
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
 
-        <View
+            </LinearLayout>
+
+        <!--<View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"
@@ -328,7 +342,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"
-            />
+            />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -360,14 +374,12 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:dividerPadding="8dp">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/editTextComments"
                         android:hint="@string/comments"
                         android:textSize="16sp"/>
@@ -375,6 +387,44 @@
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:id="@+id/attachmentLayout"
+            android:background="@color/material_gray_300"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ATTACHED CV"
+                android:id="@+id/attachmentTextView"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clear_black_24dp"
+                android:tint="@color/primary_dark_material_light"
+                android:id="@+id/removeAttachmentButton"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:paddingRight="16dp"/>
 
         </LinearLayout>
 

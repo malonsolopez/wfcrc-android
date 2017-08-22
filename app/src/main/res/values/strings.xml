@@ -113,6 +113,7 @@
         <item>Small/Branching</item>
         <item>Corrugated</item>
     </string-array>
+    <string name="feedback_email_subject">Feedback for WFCRC</string>
 
     <!-- DOCUMENT GALLERY -->
     <string name="document_gallery_title">Document Gallery</string>
@@ -147,10 +148,11 @@
     <string name="ambassador">Ambassador</string>
     <string name="attach_cv">Attach CV</string>
     <string name="volunteer_email_chooser">Send volunteer form by email</string>
-    <string name="volunteer_address">malonsolopez@gmail.com</string>
+    <string name="volunteer_address">vic.ferguson@wfcrc.org</string>
+    <!--<string name="volunteer_address">malonsolopez@gmail.com</string>-->
     <string name="not_filled">This field is mandatory</string>
     <string name="subject">This field is mandatory</string>
-    <string name="email_subject">I want to be a volunteer</string>
+    <string name="volunteer_email_subject">I want to be a volunteer</string>
     <string name="volunteer_end">Thank\'s for your submission. We\'ll keep in touch.</string>
 
     <!-- GA -->
