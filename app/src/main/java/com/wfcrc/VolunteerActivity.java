@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -112,7 +111,7 @@ public class VolunteerActivity extends AppCompatActivity {
             case R.id.sendFeedback:
                 if(retrieveDataFromForm()) {
                     try {
-                        FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), getString(R.string.email_subject), volunteerForm.toString(), volunteerForm.cv,
+                        FormUtils.sendFormByEmail(this, getString(R.string.volunteer_address), getString(R.string.volunteer_email_subject), volunteerForm.toString(), volunteerForm.cv,
                                 SENDEMAIL_REQUEST_CODE);
                     } catch (ActivityNotFoundException e) {
                         //TODO

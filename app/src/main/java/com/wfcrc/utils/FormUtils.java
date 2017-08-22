@@ -19,7 +19,8 @@ public class FormUtils {
         i.putExtra(Intent.EXTRA_EMAIL  , new String[]{to});
         i.putExtra(Intent.EXTRA_SUBJECT, subject);
         i.putExtra(Intent.EXTRA_TEXT, body);
-        i .putExtra(Intent.EXTRA_STREAM, Uri.parse(attachmentPath));
+        if(attachmentPath != null)
+            i .putExtra(Intent.EXTRA_STREAM, Uri.parse(attachmentPath));
         //activity.startActivity(Intent.createChooser(i, activity.getResources().getString(R.string.volunteer_email_chooser)));
         activity.startActivityForResult(Intent.createChooser(i, activity.getResources().getString(R.string.volunteer_email_chooser)),
                 requestCode);
