@@ -84,8 +84,8 @@ public class ProgramDetailActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.share) {
             //TODO: content for sharing
-            String subject ="subject";
-            String body ="body";
+            String subject ="";
+            String body ="";
             (new Share(this, subject, body)).share();
             //GA
             mTracker.sendEvent(getString(R.string.ga_category_share), getString(R.string.ga_programs_detail_share), mProgram.getTitle());
