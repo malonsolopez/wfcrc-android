@@ -2,21 +2,12 @@ package com.wfcrc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.wfcrc.config.AppConfig;
 import com.wfcrc.repository.FTPDocumentRepository;
 import com.wfcrc.repository.RepositoryException;
-import com.wfcrc.repository.WordPressDocumentRepository;
 import com.wfcrc.utils.VolleyCallback;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import static com.wfcrc.repository.WordPressDocumentRepository.*;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,17 +1,24 @@
 package com.wfcrc.repository;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.wfcrc.R;
 import com.wfcrc.SplashActivity;
 import com.wfcrc.pojos.Document;
 import com.wfcrc.sqlite.WFCRCDB;
+import com.wfcrc.utils.SecurityUtils;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +49,17 @@ public class FTPDocumentRepository implements Repository{
 
         protected SplashActivity.SplashCallback doInBackground(Void... params) {
             try {
-
-
                 FTPClient ftpClient = new FTPClient();
                 ftpClient.connect(InetAddress.getByName("ftp.wfcrc.org"));
-                ftpClient.login("wfcrcorg", "CoralReef1234*");
+                String ftpLogin = mContext.getSharedPreferences("WFCRC", Context.MODE_PRIVATE).getString("value1", null);
+                String ftpPwd = mContext.getSharedPreferences("WFCRC", Context.MODE_PRIVATE).getString("value2", null);
+                if (ftpLogin== null || ftpPwd == null) {
+                    prepareFTPSharePreferences();
+                    ftpLogin = mContext.getSharedPreferences("WFCRC", Context.MODE_PRIVATE).getString("value1", null);
+                    ftpPwd = mContext.getSharedPreferences("WFCRC", Context.MODE_PRIVATE).getString("value2", null);
+                }
+                SecurityUtils encryptionHelper = new SecurityUtils("".toCharArray());
+                ftpClient.login(encryptionHelper.decrypt(ftpLogin), encryptionHelper.decrypt(ftpPwd));
                 System.out.println("status :: " + ftpClient.getStatus());
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                 ftpClient.enterLocalPassiveMode();
@@ -111,6 +124,33 @@ public class FTPDocumentRepository implements Repository{
                 }
             }
             callback.proceedWithLaunching();
+        }
+
+        private void prepareFTPSharePreferences(){
+                SharedPreferences.Editor edit = mContext.getSharedPreferences("WFCRC", Context.MODE_PRIVATE).edit();
+                String strLine;
+                String user = null;
+                String password = null;
+                try {
+                    InputStream input = mContext.getResources().openRawResource(R.raw.data);
+                    //InputStream input = mContext.getAssets().open("data.txt");
+                    BufferedReader br = new BufferedReader(new InputStreamReader(input));
+                    int count = 0;
+                    while ((strLine = br.readLine()) != null) {
+                        if (count == 0) {
+                            user = strLine;
+                        } else {
+                            password = strLine;
+                        }
+                        count++;
+                    }
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                edit.putString("value1", user);
+                edit.putString("value2", password);
+                edit.commit();
         }
 
     }
